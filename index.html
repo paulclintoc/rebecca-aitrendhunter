@@ -2026,29 +2026,16 @@ const APPS = [
 // ── GITHUB SYNC CONFIG ─────────────────────────────────
 // FILL THESE IN with your repo details before deploying.
 const GITHUB_CONFIG = {
-  owner: 'paulclintoc',  // e.g. 'aihunter-pe'
-  repo:  'rebecca-aitrendhunter',                // e.g. 'ai-hunter-dashboard'
-  path:  'index.html',                    // the path to THIS file in the repo
+  owner: 'paulclintoc',
+  repo:  'rebecca-aitrendhunter',
+  path:  'index.html',
   branch: 'main'
 };
 
 // Decisions baked into this file. Auto-updated by the dashboard via the GitHub API.
 // DO NOT manually edit this block — the dashboard rewrites it on every save.
 // ── DECISIONS START ──
-const BAKED_DECISIONS = {
-  "Runout Poker Trainer GTO Coach": {
-    "status": "interesting",
-    "at": "2026-05-16T10:32:46.818Z"
-  },
-  "That Girl: Become a Clean Girl": {
-    "status": "do",
-    "at": "2026-05-16T11:10:20.924Z"
-  },
-  "Himyo – Your Way, Your Pace": {
-    "status": "skip",
-    "at": "2026-05-16T11:11:09.741Z"
-  }
-};
+const BAKED_DECISIONS = {};
 // ── DECISIONS END ──
 
 // ── BUILD ─────────────────────────────────────────────────────
@@ -2139,7 +2126,9 @@ async function syncToGitHub(isRetry = false) {
     updateSyncIndicator();
     return;
   }
-  if (SYNC.status === 'saving') {
+  // Only enforce the "one save at a time" guard for fresh saves, not retries.
+  // A retry is part of an already-in-flight save and must be allowed through.
+  if (!isRetry && SYNC.status === 'saving') {
     // Already in flight — mark a follow-up. The current save's success handler will fire another sync.
     SYNC.pending = true;
     return;
@@ -2156,8 +2145,11 @@ async function syncToGitHub(isRetry = false) {
   };
 
   try {
-    // 1. Fetch current file
-    const getRes = await fetch(`${apiBase}?ref=${GITHUB_CONFIG.branch}`, { headers });
+    // 1. Fetch current file (cache-buster prevents GitHub's CDN from serving a stale SHA)
+    const getRes = await fetch(`${apiBase}?ref=${GITHUB_CONFIG.branch}&_=${Date.now()}`, {
+      headers,
+      cache: 'no-store'
+    });
     if (!getRes.ok) {
       throw new Error(`Fetch failed (${getRes.status}): ${await getRes.text()}`);
     }
@@ -2195,12 +2187,12 @@ async function syncToGitHub(isRetry = false) {
     });
 
     if (putRes.status === 409 || putRes.status === 422) {
-      // Conflict — another save happened in between. Retry once with fresh SHA.
+      // Conflict — GitHub returned a stale SHA. Wait a moment and retry with fresh fetch.
       if (!isRetry) {
-        SYNC.status = 'idle';
+        await new Promise(r => setTimeout(r, 600));
         return syncToGitHub(true);
       }
-      throw new Error(`Conflict — try again. (${putRes.status})`);
+      throw new Error(`Conflict after retry (${putRes.status}). Reload the page.`);
     }
     if (!putRes.ok) {
       throw new Error(`Commit failed (${putRes.status}): ${await putRes.text()}`);
