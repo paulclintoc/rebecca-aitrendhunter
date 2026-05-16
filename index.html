@@ -1123,905 +1123,266 @@
 </div>
 
 <script>
-const APPS = [
-  {
-    name: "Himyo – Your Way, Your Pace", verdict: "GREEN", category: "Lifestyle",
-    released: "2026-01-26", downloads: 15000, revenue: 121300, ads: "New", rpd: 8.09,
-    stLink: "https://app.sensortower.com/overview/6758081518?country=US",
-    description: "A chat app where you talk to people anonymously using a fake identity.",
-    why: "Each user pays about $8 — that's huge. Only 15,000 people downloaded it, but it still makes $121,000 a month. The way they make money really works.",
-    findings: [
-      "Brand name not searchable.",
-      "Extraordinary $10.05 RPD.",
-      "Just started running ads ('New').",
-      "Vietnamese publisher."
-    ],
-    keywords: [
-      { term: "anonymous social app", count: 50, density: "light", finding: "few dedicated anonymous social apps", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=anonymous+social+app" },
-      { term: "anonymous chat rooms", count: 125, density: "medium", finding: "moderately crowded anonymous chat space", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=anonymous+chat+rooms" },
-      { term: "talk to strangers app", count: 50, density: "light", finding: "small stranger chat niche", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=talk+to+strangers+app" }
-    ]
-  },
-  {
-    name: "Runout Poker Trainer GTO Coach", verdict: "GREEN", category: "Education",
-    released: "2026-03-23", downloads: 24000, revenue: 57900, ads: "New", rpd: 2.41,
-    stLink: "https://app.sensortower.com/overview/6760210288?country=US",
-    description: "Teaches you how to play poker the smart way with practice drills.",
-    why: "Almost nobody is making a poker training app. There is no big company in this space. Runout is the leader and already makes $58,000 a month after just 2 months.",
-    findings: [
-      "ORGANIC.",
-      "App name packed with search keywords (poker trainer, GTO, coach).",
-      "New ads = just starting paid.",
-      "$2.35 RPD quality organic users."
-    ],
-    keywords: [
-      { term: "poker trainer", count: 175, density: "medium", finding: "Runout leads 23.4K/$54.9K. Many tangential Video Poker games. Training niche smaller.", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=poker+trainer" },
-      { term: "gto poker", count: 50, density: "empty", finding: "Very niche. Runout dominates. NTPoker 1.9K/$9.4K, GTO Preflop 1.4K/$848.", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=gto+poker" },
-      { term: "texas holdem strategy", count: 50, density: "empty", finding: "Mostly poker games. Runout highest-revenue dedicated training app at $54.9K.", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=texas+holdem+strategy" }
-    ]
-  },
-  {
-    name: "Localize - Farmers Market", verdict: "GREEN", category: "Food & Drink",
-    released: "2025-12-29", downloads: 170000, revenue: 153300, ads: "Active", rpd: 0.9,
-    stLink: "https://app.sensortower.com/overview/6756440767?country=US",
-    description: "Helps you find farmers markets near you.",
-    why: "Localize is the top farmers market app, making $153,000 a month. Only one other app (Root) is in this space, and it is 10 times smaller. People want local food right now.",
-    findings: [
-      "ORGANIC + PAID UA.",
-      "Solid $1.04 RPD.",
-      "Active ads expanding leadership.",
-      "Trending consumer interest in local/farm-to-table."
-    ],
-    keywords: [
-      { term: "farmers market", count: 1475, density: "empty", finding: "59 pages ~1475 noisy results (DoorDash, Sprouts, games). Real direct competitors: Localize $153K leads. Root #2 at $17K. No 3rd real player", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=farmers+market" },
-      { term: "local food finder", count: 4, density: "empty", finding: "ALL dead w/ 0 DLs", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=local+food+finder" },
-      { term: "organic local produce", count: 7, density: "empty", finding: "ALL dead w/ 0 DLs/$0", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=organic+local+produce" }
-    ]
-  },
-  {
-    name: "Root: Farmers Market Finder", verdict: "GREEN", category: "Food & Drink",
-    released: "2026-03-19", downloads: 21000, revenue: 17000, ads: "New", rpd: 0.81,
-    stLink: "https://app.sensortower.com/overview/6760575738?country=US",
-    description: "Another app for finding farmers markets near you.",
-    why: "Only two apps make farmers market finders, and both make real money. Root is the smaller one but still earns $17,000 a month. The space is wide open.",
-    findings: [
-      "ORGANIC.",
-      "Just starting paid UA.",
-      "$0.83 RPD healthy.",
-      "PlatePal publisher."
-    ],
-    keywords: [
-      { term: "farmers market", count: 1475, density: "saturated", finding: "59 pages ~1475 noisy. Localize $153K dominates. Root #2 at $17K (this app). Only 2 real players in niche", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=farmers+market" },
-      { term: "local food finder", count: 4, density: "empty", finding: "ALL dead. Niche empty", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=local+food+finder" },
-      { term: "organic local produce", count: 7, density: "empty", finding: "ALL dead. Niche empty", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=organic+local+produce" }
-    ]
-  },
-  {
-    name: "That Girl: Become a Clean Girl", verdict: "GREEN", category: "Lifestyle",
-    released: "2025-12-15", downloads: 40000, revenue: 21800, ads: "N/A", rpd: 0.55,
-    stLink: "https://app.sensortower.com/overview/6756178380?country=US",
-    description: "A daily habit tracker for self-care, makeup, and 'glow up' routines.",
-    why: "Riding the 'that girl' TikTok trend. Makes $22,000 a month with good payment from users. Very few apps compete in the 'glow up' space.",
-    findings: [
-      "ORGANIC / VIRAL.",
-      "Riding the 'that girl' TikTok self-care trend.",
-      "Good $0.51 RPD.",
-      "Croatian publisher."
-    ],
-    keywords: [
-      { term: "daily routine tracker", count: 75, density: "empty", finding: "Dear Me $31K/mo leads. Moderate competition.", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=daily+routine+tracker" },
-      { term: "self care routine planner", count: 10, density: "empty", finding: "all tiny apps, no dominant player", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=self+care+routine+planner" },
-      { term: "glow up habit tracker", count: 1, density: "empty", finding: "essentially empty niche", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=glow+up+habit+tracker" }
-    ]
-  },
-  {
-    name: "BarrelBook: Whiskey Collection", verdict: "GREEN", category: "Food & Drink",
-    released: "2025-12-15", downloads: 2000, revenue: 1000, ads: "Active", rpd: 0.5,
-    stLink: "https://app.sensortower.com/overview/6751737898?country=US",
-    description: "Lets whiskey fans keep track of every bottle they own.",
-    why: "BarrelBook is the only real whiskey tracking app. Wine cellar apps make $89,000 a month, so the same idea for whiskey can grow big. Whiskey fans pay well.",
-    findings: [
-      "ORGANIC + Active UA.",
-      "Solo dev (Peter Reilly).",
-      "$1.35 RPD.",
-      "Premium whiskey collector audience."
-    ],
-    keywords: [
-      { term: "whiskey collection", count: 15, density: "empty", finding: "BarrelBook leads (1.4K/$1.3K). Whiskr Whisky Tasting only other earner ($18). Niche has only ONE real player", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=whiskey+collection" },
-      { term: "wine cellar app", count: 17, density: "empty", finding: "Adjacent niche. InVintory: Wine Cellar 27K DL/$89K/mo proves alcohol collection tracking model scales. Whiskey side wide open vs wine", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=wine+cellar+app" }
-    ]
-  },
-  {
-    name: "Pep AI - Peptide Tracker", verdict: "GREEN", category: "Health & Fitness",
-    released: "2026-02-16", downloads: 12000, revenue: 4000, ads: "N/A", rpd: 0.33,
-    stLink: "https://app.sensortower.com/overview/6758682710?country=US",
-    description: "Tracks doses of weight-loss drugs like Ozempic and other peptides.",
-    why: "GLP-1 weight loss drugs are huge right now. People need an app to track their doses. This is a brand new kind of app with very few competitors. Big chance to be first.",
-    findings: [
-      "ORGANIC. \"Peptide Tracker\" = exact niche keyword.",
-      "GLP-1/peptide tracking is a NEW category.",
-      "$4K/mo from niche market.",
-      "Riding the massive GLP-1 weight loss drug trend."
-    ],
-    keywords: [
-      { term: "peptide tracker", count: 100, density: "light", finding: "mostly generic health apps not peptide-specific", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=peptide+tracker" },
-      { term: "glp-1 tracker", count: 125, density: "medium", finding: "growing GLP-1/peptide niche", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=glp-1+tracker" },
-      { term: "peptide dosing", count: 25, density: "empty", finding: "very specific dosing niche", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=peptide+dosing" }
-    ]
-  },
-  {
-    name: "Safe Choice - Product Scanner", verdict: "GREEN", category: "Health & Fitness",
-    released: "2026-03-09", downloads: 52000, revenue: 12600, ads: "N/A", rpd: 0.24,
-    stLink: "https://app.sensortower.com/overview/6758905553?country=US",
-    description: "Scan food and products with your phone to see if the ingredients are safe.",
-    why: "Only a few apps scan food for bad ingredients. People care more about health every year. Safe Choice got 52,000 downloads in just 2 months.",
-    findings: [
-      "ORGANIC / ASO.",
-      "Name contains searchable keywords \"product scanner\". 52K DLs in 2 months with $12.6K rev.",
-      "Riding food safety/ingredient awareness trend."
-    ],
-    keywords: [
-      { term: "food ingredient scanner", count: 25, density: "empty", finding: "very few dedicated ingredient scanners", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=food+ingredient+scanner" },
-      { term: "product safety scanner", count: 25, density: "empty", finding: "safety angle barely exists", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=product+safety+scanner" },
-      { term: "food scanner app", count: 75, density: "light", finding: "moderate competition in food scanning", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=food+scanner+app" }
-    ]
-  },
-  {
-    name: "Focus Town: Study With Friends", verdict: "GREEN", category: "Productivity",
-    released: "2026-02-06", downloads: 531000, revenue: 34600, ads: "N/A", rpd: 0.07,
-    stLink: "https://app.sensortower.com/overview/6758457625?country=US",
-    description: "Helps kids study together online in a fun game-like way.",
-    why: "ADHD focus apps are empty — only 8 apps exist and none have any downloads. Focus Town got 531,000 downloads in 3 months without paying for ads. Kids love it.",
-    findings: [
-      "MIXED — likely organic + viral.",
-      "Subtitle contains searchable keywords. 531K DLs in 3 months with no visible ad network = viral growth from TikTok/student communities + ASO.",
-      "Top countries US/South Korea/UK."
-    ],
-    keywords: [
-      { term: "study with friends", count: 100, density: "light", finding: "Focus Town #2 with 531K DLs. Focus Tree 72K/$11K and Regain 321K/$1K nearest competitors", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=study+with+friends" },
-      { term: "pomodoro focus timer", count: 325, density: "heavy", finding: "Structured $248K/mo dominates. Most dead apps. Only 5-6 active competitors", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=pomodoro+focus+timer" },
-      { term: "focus timer adhd", count: 8, density: "empty", finding: "ALL with 0 downloads. ADHD + focus niche completely empty", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=focus+timer+adhd" }
-    ]
-  },
-  {
-    name: "ATC - Live Air Traffic Radio", verdict: "YELLOW", category: "Travel",
-    released: "2026-01-12", downloads: 69000, revenue: 413900, ads: "New", rpd: 6.0,
-    stLink: "https://app.sensortower.com/overview/6755132266?country=US",
-    description: "Lets you listen to live radio between airplane pilots and air traffic controllers.",
-    why: "General flight tracker apps are too crowded, but apps that play live air traffic radio? Only 2 or 3 exist. This app made $414,000 a month before even running any ads.",
-    findings: [
-      "ORGANIC.",
-      "App name = search keyword.",
-      "Built $414K/mo BEFORE running any ads.",
-      "US/UK/Canada organic aviation markets."
-    ],
-    keywords: [
-      { term: "live air traffic", count: 80, density: "light", finding: "Flight Tracker+ $261K / Plane Finder $130K / LiveATC $24K", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=live+air+traffic" },
-      { term: "flight tracker live", count: 60, density: "light", finding: "heavily crowded generic flight tracker market", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=flight+tracker+live" },
-      { term: "aviation radio", count: 30, density: "light", finding: "mostly education/training. AUDIO ATC niche has <5 real competitors", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=aviation+radio" }
-    ]
-  },
-  {
-    name: "Moshi: SSH & MOSH Terminal", verdict: "YELLOW", category: "Developer Tools",
-    released: "2026-01-21", downloads: 11000, revenue: 43100, ads: "Active", rpd: 3.92,
-    stLink: "https://app.sensortower.com/overview/6757859949?country=US",
-    description: "A coding tool that lets developers connect to servers from their phone, built for AI coding.",
-    why: "Regular SSH apps are everywhere, but Moshi is built for AI coding tools like Claude Code and Cursor. That's a brand new use case. Makes $43,000 a month.",
-    findings: [
-      "Subtitle 'for Claude Code, Codex & more' = keyword-stuffed for AI coding tools.",
-      "Ads Network Active.",
-      "Publisher from Japan. 573 ratings + high RPD ($1.80) = strong organic conversion boosted by paid UA."
-    ],
-    keywords: [
-      { term: "ssh terminal", count: 225, density: "medium", finding: "Very crowded legacy market. Textastic (27.9K DLs, $41K), xTerminal (17.6K, $7.5K), ServerCat (6K, $7.2K), Shelly (5.6K, $4.2K).", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=ssh+terminal" },
-      { term: "mosh ssh client", count: 1, density: "empty", finding: "La Terminal: Mosh & SSH (2.5K DLs, $1.7K). Very niche MOSH protocol space.", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=mosh+ssh+client" },
-      { term: "terminal for claude code", count: 1, density: "empty", finding: "Arcway: Remote Agents (0 DLs, $0). Emerging niche with no established players.", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=terminal+for+claude+code" }
-    ]
-  },
-  {
-    name: "Stella - Manifest Anything", verdict: "YELLOW", category: "Health & Fitness",
-    released: "2026-01-29", downloads: 59000, revenue: 204500, ads: "N/A", rpd: 3.47,
-    stLink: "https://app.sensortower.com/overview/6757347283?country=US",
-    description: "Helps you 'manifest' your goals using affirmations and journaling.",
-    why: "Each user pays $3.47 — really strong. The manifestation app space has some competition but Stella proves people will pay a lot for it.",
-    findings: [
-      "PAID UA / MIXED. \"Stella\" is a brand name nobody searches for.",
-      "Excellent $3.47 RPD.",
-      "$204K/mo with non-searchable name = likely running paid ads.",
-      "Manifestation community also drives viral sharing."
-    ],
-    keywords: [
-      { term: "manifestation app", count: 100, density: "light", finding: "moderately crowded manifestation market", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=manifestation+app" },
-      { term: "manifest journal", count: 25, density: "empty", finding: "small journaling sub-niche", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=manifest+journal" },
-      { term: "law of attraction app", count: 75, density: "light", finding: "established spiritual/LOA market", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=law+of+attraction+app" }
-    ]
-  },
-  {
-    name: "Military Calisthenics Women", verdict: "YELLOW", category: "Health & Fitness",
-    released: "2025-12-14", downloads: 72000, revenue: 144800, ads: "N/A", rpd: 2.01,
-    stLink: "https://app.sensortower.com/overview/6755748144?country=US",
-    description: "Bodyweight workouts for women, designed in a military style.",
-    why: "Workout apps for women using calisthenics + military style is a small unique space. Makes $145,000 a month with $2 per user. The mix of words makes it stand out.",
-    findings: [
-      "ORGANIC / ASO.",
-      "Every word in name is a searchable keyword.",
-      "$144.8K/mo with $2.01 RPD = excellent monetization.",
-      "Targeting underserved niche (women calisthenics with military branding)."
-    ],
-    keywords: [
-      { term: "calisthenics app", count: 50, density: "light", finding: "moderate competition", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=calisthenics+app" },
-      { term: "women workout no equipment", count: 25, density: "empty", finding: "small underserved niche", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=women+workout+no+equipment" },
-      { term: "bodyweight workout app", count: 50, density: "light", finding: "moderate competition", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=bodyweight+workout+app" }
-    ]
-  },
-  {
-    name: "Sports Card Scanner: Spoly", verdict: "YELLOW", category: "Lifestyle",
-    released: "2026-03-18", downloads: 45000, revenue: 75000, ads: "N/A", rpd: 1.67,
-    stLink: "https://app.sensortower.com/overview/6760181919?country=US",
-    description: "Scan a sports card with your phone and find out how much it's worth.",
-    why: "Card scanner space has some apps, but Spoly makes $75,000 a month with strong payment per user. Sports card collectors love to pay for tools.",
-    findings: [
-      "ORGANIC / ASO.",
-      "Name contains exact search keywords.",
-      "Strong $1.33 RPD.",
-      "Sports card scanning with value estimation."
-    ],
-    keywords: [
-      { term: "sports card scanner", count: 125, density: "medium", finding: "moderately crowded card scanning market", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=sports+card+scanner" },
-      { term: "card value scanner", count: 175, density: "medium", finding: "broader card value estimation market", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=card+value+scanner" },
-      { term: "pokemon card scanner", count: 50, density: "light", finding: "niche Pokemon angle less crowded", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=pokemon+card+scanner" }
-    ]
-  },
-  {
-    name: "Dot: Digital Business Card", verdict: "YELLOW", category: "Business",
-    released: "2026-02-25", downloads: 11000, revenue: 18100, ads: "N/A", rpd: 1.65,
-    stLink: "https://app.sensortower.com/overview/6747437276?country=US",
-    description: "Tap an NFC card on a phone to share your contact info instantly.",
-    why: "Digital business cards have big leaders, but NFC physical card apps? Wide open — all the existing apps are dead. Makes $18,000 a month, but you need to sell physical cards too.",
-    findings: [
-      "ORGANIC. \"Digital Business Card\" in name = searchable keyword.",
-      "No visible ad network.",
-      "NFC physical card sales drive app installs.",
-      "$1.43 RPD."
-    ],
-    keywords: [
-      { term: "digital business card", count: 2700, density: "saturated", finding: "Blinq $407K/mo dominates. HiHello $48.6K/mo. HeyDrop $29.9K/mo. Most results are QR/scanner apps mentioning \"business card\" in description.", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=digital+business+card" },
-      { term: "nfc business card", count: 75, density: "empty", finding: "all dead apps with 0 downloads. NFC-specific niche completely empty.", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=nfc+business+card" },
-      { term: "contact sharing app", count: 50, density: "empty", finding: "all dead apps. Contact sharing angle barely exists.", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=contact+sharing+app" }
-    ]
-  },
-  {
-    name: "Coursiv - AI Certificates", verdict: "YELLOW", category: "Education",
-    released: "2026-03-04", downloads: 72000, revenue: 64700, ads: "New", rpd: 0.9,
-    stLink: "https://app.sensortower.com/overview/6758934906?country=US",
-    description: "Online classes that give you a certificate for learning AI skills.",
-    why: "AI courses with certificates is a small space. Makes $65,000 a month. Only one real competitor (DataCamp).",
-    findings: [
-      "Brand name not searchable but description targets AI certificate keywords. 72K DLs with New ads suggests some paid element.",
-      "$0.74 RPD low for education."
-    ],
-    keywords: [
-      { term: "certificate courses", count: 200, density: "medium", finding: "Alison 232K DL/$93K dominates. Simplilearn 50K DL.", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=certificate+courses" },
-      { term: "ai courses", count: 75, density: "empty", finding: "DataCamp 32K/$55.9K leads. AI CERTs 27.6K/$0. Niche focused.", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=ai+courses" },
-      { term: "online learning app", count: 1075, density: "saturated", finding: "Alison 232K/$93K, Oda Class 112K. Broad market massive but AI cert angle differentiates.", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=online+learning+app" }
-    ]
-  },
-  {
-    name: "Dashi: Recipe App", verdict: "YELLOW", category: "Food & Drink",
-    released: "2025-12-31", downloads: 17000, revenue: 13300, ads: "Inactive", rpd: 0.78,
-    stLink: "https://app.sensortower.com/overview/6757019679?country=US",
-    description: "Saves and organizes your favorite recipes.",
-    why: "Recipe app space is packed, but Dashi makes $13,000 a month all on its own with no ads. Proves a small recipe app can survive — but the generic name limits growth.",
-    findings: [
-      "ORGANIC.",
-      "Studio 42.",
-      "$0.84 RPD healthy.",
-      "Inactive ads = pure organic monetization."
-    ],
-    keywords: [
-      { term: "recipe app", count: 7500, density: "saturated", finding: "America's Test Kitchen 20K DL/$168K/mo, Starbucks Secret Menu $39K, Annabel Karmel $31K, Dashi $13K", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=recipe+app" }
-    ]
-  },
-  {
-    name: "Daily Hanzi", verdict: "YELLOW", category: "Education",
-    released: "2026-02-02", downloads: 16000, revenue: 10800, ads: "N/A", rpd: 0.68,
-    stLink: "https://app.sensortower.com/overview/6756919959?country=US",
-    description: "Teaches you Chinese characters, made for people in Southeast Asia.",
-    why: "Most Chinese learning apps target Western users. Daily Hanzi targets Southeast Asia — a totally different group. Makes $11,000 a month from this special group.",
-    findings: [
-      "ORGANIC/ASO.",
-      "Solo dev (Alex Liu/ZELOS).",
-      "$1.15 RPD healthy.",
-      "Targets SE Asian audience (Indonesia/Philippines/Vietnam) learning Mandarin — geographic niche separate from Western HelloChinese audience."
-    ],
-    keywords: [
-      { term: "learn chinese characters", count: 350, density: "heavy", finding: "HelloChinese 229K DL/$340K, SuperChinese 279K/$288K dominate Western audience", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=learn+chinese+characters" },
-      { term: "belajar mandarin", count: 17, density: "empty", finding: "Indonesian niche. AI Chinese 18K DL/$304 only meaningful. Daily Hanzi at $10K beats SE Asian competitors", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=belajar+mandarin" },
-      { term: "hanzi chinese", count: 50, density: "light", finding: "Hanping $1.2K, Tobo $325, GoHanzi $70. Hanzi-specific niche has Daily Hanzi as #1", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=hanzi+chinese" }
-    ]
-  },
-  {
-    name: "Hear Baby Heartbeat - Molio", verdict: "YELLOW", category: "Health & Fitness",
-    released: "2026-03-12", downloads: 25000, revenue: 15400, ads: "N/A", rpd: 0.62,
-    stLink: "https://app.sensortower.com/overview/6760187447?country=US",
-    description: "Lets pregnant moms listen to their baby's heartbeat using the phone.",
-    why: "Pregnant moms care a lot about hearing their baby. That feeling makes them pay. New moms are always coming in, so the user base keeps refreshing.",
-    findings: [
-      "ORGANIC / ASO. \"Hear Baby Heartbeat\" = exact search keyword.",
-      "$15.4K/mo with $0.62 RPD.",
-      "Pregnancy niche with emotional appeal = high conversion."
-    ],
-    keywords: [
-      { term: "baby heartbeat monitor", count: 100, density: "light", finding: "established pregnancy niche", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=baby+heartbeat+monitor" },
-      { term: "pregnancy heartbeat", count: 25, density: "empty", finding: "small overlap with broader pregnancy apps", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=pregnancy+heartbeat" },
-      { term: "hear baby heartbeat", count: 25, density: "empty", finding: "few direct competitors for audio feature", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=hear+baby+heartbeat" }
-    ]
-  },
-  {
-    name: "Areum", verdict: "YELLOW", category: "Lifestyle",
-    released: "2026-01-21", downloads: 25000, revenue: 11500, ads: "Active", rpd: 0.46,
-    stLink: "https://app.sensortower.com/overview/6756916007?country=US",
-    description: "Takes a photo of your face and rates how attractive you are.",
-    why: "Almost no apps test 'how attractive am I' — and the ones that do are dead. Areum is the leader and makes $11,500 a month.",
-    findings: [
-      "Brand name not searchable.",
-      "Active ads confirm paid UA.",
-      "Subtitle targets organic searches.",
-      "Top countries US/India/Canada."
-    ],
-    keywords: [
-      { term: "attractiveness test", count: 50, density: "light", finding: "mostly broad personality/quiz apps. Few dedicated attractiveness testers.", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=attractiveness+test" },
-      { term: "face analysis app", count: 50, density: "empty", finding: "fragmented market, no dominant player. Beauty Scanner 16K DLs/$30 rev.", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=face+analysis+app" },
-      { term: "how attractive am i", count: 25, density: "empty", finding: "almost all dead apps with $0 rev. Areum leads at 25K DLs/$11.5K.", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=how+attractive+am+i" }
-    ]
-  },
-  {
-    name: "Fanworks: AO3 Unofficial", verdict: "YELLOW", category: "Books",
-    released: "2026-03-27", downloads: 6000, revenue: 2000, ads: "N/A", rpd: 0.33,
-    stLink: "https://app.sensortower.com/overview/6761056313?country=US",
-    description: "A reader app for fanfiction from the AO3 website.",
-    why: "Fanfiction app space is small but real. Two apps already make money. The downside is fans don't like to pay much.",
-    findings: [
-      "ORGANIC.",
-      "AO3 = search keyword.",
-      "$0.09 RPD."
-    ],
-    keywords: [
-      { term: "fanfiction reader", count: 50, density: "light", finding: "FanFiction|AO3 22K/$1.6K", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=fanfiction+reader" },
-      { term: "ao3 reader", count: 10, density: "empty", finding: "AO3 FanFic Reader 34K/$2.4K", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=ao3+reader" },
-      { term: "novel reading", count: 1200, density: "saturated", finding: "broader market", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=novel+reading" }
-    ]
-  },
-  {
-    name: "Ruut: Personal Coach", verdict: "YELLOW", category: "Health & Fitness",
-    released: "2026-04-09", downloads: 12000, revenue: 2000, ads: "N/A", rpd: 0.17,
-    stLink: "https://app.sensortower.com/overview/6755474436?country=US",
-    description: "An AI life coach in your pocket that gives daily advice.",
-    why: "AI coach apps have some competition but the 'personal coach' space is wide open. New app, $2,000 a month already.",
-    findings: [
-      "ORGANIC. \"Ruut\" brand name with \"Personal Coach\" subtitle containing searchable keywords.",
-      "$2K/mo early revenue. 12K DLs in ~1 month = decent organic growth."
-    ],
-    keywords: [
-      { term: "personal coach app", count: 25, density: "empty", finding: "very uncrowded niche", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=personal+coach+app" },
-      { term: "ai life coach", count: 150, density: "medium", finding: "moderately crowded AI coaching space", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=ai+life+coach" },
-      { term: "health coaching app", count: 75, density: "light", finding: "some competition in health coaching", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=health+coaching+app" }
-    ]
-  },
-  {
-    name: "SocialLiteApp", verdict: "YELLOW", category: "Productivity",
-    released: "2026-01-29", downloads: 22000, revenue: 2000, ads: "N/A", rpd: 0.09,
-    stLink: "https://app.sensortower.com/overview/6757661674?country=US",
-    description: "Strips the addicting parts out of social media apps so you scroll less.",
-    why: "Most screen time apps just block phone use. This one removes the addicting parts instead — almost no other app does that. Only $2,000 a month so far, but very new and worth watching.",
-    findings: [
-      "ORGANIC / VIRAL.",
-      "Brand name not a keyword.",
-      "No visible ads. 22K DLs from US/UK/Canada = word-of-mouth and digital wellness community.",
-      "Novel concept: removes addictive features instead of blocking."
-    ],
-    keywords: [
-      { term: "stop scrolling social media", count: 1, density: "empty", finding: "only 1 dead app. This specific angle barely exists", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=stop+scrolling+social+media" },
-      { term: "screen time limit", count: 175, density: "medium", finding: "crowded with Opal $585K/mo / Kids360 $555K/mo / minimalist phone $149K/mo", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=screen+time+limit" },
-      { term: "social media detox", count: 100, density: "light", finding: "removes addictive features instead of blocking. Almost no direct competitors", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=social+media+detox" }
-    ]
-  },
-  {
-    name: "Anna : Sign Language (LSF)", verdict: "YELLOW", category: "Education",
-    released: "2026-02-12", downloads: 63000, revenue: 5000, ads: "N/A", rpd: 0.08,
-    stLink: "https://app.sensortower.com/overview/6758141347?country=US",
-    description: "Teaches French Sign Language step by step.",
-    why: "French Sign Language is a small space with only 2 or 3 real apps. Anna is #2 with 63,000 downloads. The money side needs work but the country lock is real.",
-    findings: [
-      "ORGANIC/ASO.",
-      "Solo dev.",
-      "French Sign Language (LSF) niche. 63K DLs from France/US/Canada.",
-      "$0.09 RPD = poor monetization needs work but proves market."
-    ],
-    keywords: [
-      { term: "sign language learning", count: 75, density: "empty", finding: "Lingvano dominates 128K DL/$576K/mo broader market", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=sign+language+learning" },
-      { term: "french sign language", count: 20, density: "empty", finding: "ALL dead w/ 0 DL/$0 rev. Anna essentially only active FSL app", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=french+sign+language" },
-      { term: "langue des signes", count: 150, density: "medium", finding: "Pause LSF $10.7K leads. Anna #2 at $5K. LSF niche has 2-3 real players", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=langue+des+signes" }
-    ]
-  },
-  {
-    name: "Wello - Heart Health Monitor", verdict: "YELLOW", category: "Lifestyle",
-    released: "2026-03-27", downloads: 18000, revenue: 1000, ads: "N/A", rpd: 0.06,
-    stLink: "https://app.sensortower.com/overview/6760641376?country=US",
-    description: "Tracks your heart rate and overall heart health.",
-    why: "Health check-in apps are pretty open, but only makes $1,000 a month. Could grow but the money side needs work.",
-    findings: [
-      "ORGANIC.",
-      "Heart health/wellness monitoring app.",
-      "Low $0.07 RPD."
-    ],
-    keywords: [
-      { term: "heart health monitor", count: 3, density: "empty", finding: "moderate heart monitoring competition", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=heart+health+monitor" },
-      { term: "wellness check in app", count: 1, density: "empty", finding: "specific wellness check-in angle uncrowded", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=wellness+check+in+app" },
-      { term: "heart rate wellness", count: 2, density: "empty", finding: "overlaps broader heart rate market", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=heart+rate+wellness" }
-    ]
-  },
-  {
-    name: "Sleepmaxx AI", verdict: "YELLOW", category: "Health & Fitness",
-    released: "2025-12-23", downloads: 14000, revenue: 100, ads: "N/A", rpd: 0.01,
-    stLink: "https://app.sensortower.com/overview/6756597221?country=US",
-    description: "Tracks your sleep and gives tips to sleep better, riding the 'maxxing' trend.",
-    why: "Riding the 'maxxing' TikTok trend. AI sleep apps are still a small space. Only makes $100 a month right now — they need to fix that — but the trend is hot.",
-    findings: [
-      "ORGANIC / VIRAL.",
-      "TikTok-friendly brand \"Sleepmaxx\" riding the \"maxxing\" cultural trend.",
-      "$100 revenue = pre-monetization. 14K DLs from trend awareness not keyword search."
-    ],
-    keywords: [
-      { term: "ai sleep tracker", count: 25, density: "empty", finding: "AI sleep niche is small", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=ai+sleep+tracker" },
-      { term: "sleep optimization app", count: 25, density: "empty", finding: "few dedicated optimization apps", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=sleep+optimization+app" },
-      { term: "sleep quality tracker", count: 25, density: "empty", finding: "few dedicated sleep quality trackers", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=sleep+quality+tracker" }
-    ]
-  },
-  {
-    name: "MacroFactor - Macro Tracker", verdict: "RED", category: "Health & Fitness",
-    released: "2021-09-15", downloads: 26000, revenue: 235000, ads: "N/A", rpd: 9.04,
-    stLink: "https://app.sensortower.com/overview/1553503471?country=US",
-    description: "Tracks calories, protein, carbs, and fats for people on diets.",
-    why: "Calorie tracker space is one of the biggest and most crowded. MyFitnessPal owns it. MacroFactor only works because it built loyal fans since 2021 — you can't copy that.",
-    findings: [
-      "ORGANIC. \"Macro Tracker\" = searchable keyword.",
-      "Established app (2021) with loyal user base and excellent $9.04 RPD.",
-      "Brand loyalty built over years."
-    ],
-    keywords: [
-      { term: "macro tracker", count: 900, density: "saturated", finding: "massively crowded macro/nutrition market", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=macro+tracker" },
-      { term: "workout nutrition tracker", count: 25, density: "empty", finding: "small niche combining workout + nutrition", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=workout+nutrition+tracker" },
-      { term: "macro counting app", count: 25, density: "empty", finding: "few apps use \"macro counting\" specifically", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=macro+counting+app" }
-    ]
-  },
-  {
-    name: "Funovel - Reading Good Books", verdict: "RED", category: "Books",
-    released: "2025-12-28", downloads: 13000, revenue: 69500, ads: "New", rpd: 5.35,
-    stLink: "https://app.sensortower.com/overview/6755107081?country=US",
-    description: "An app for reading romance novels and other stories.",
-    why: "Romance novel apps are packed — 1,450 of them. Big names like GoodNovel make $8.7 million a month. No room to grow.",
-    findings: [
-      "ORGANIC/ASO + NEW PAID.",
-      "Keyword-rich subtitle.",
-      "Chinese publisher.",
-      "$5.12 RPD."
-    ],
-    keywords: [
-      { term: "romance novels", count: 1450, density: "saturated", finding: "GoodNovel $8.7M Buenovela $885K", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=romance+novels" },
-      { term: "web novel reader", count: 10, density: "empty", finding: "MoboReader $555K", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=web+novel+reader" },
-      { term: "novel reading", count: 1200, density: "saturated", finding: "Pocket FM $8.8M TapRead $288K", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=novel+reading" }
-    ]
-  },
-  {
-    name: "FlightDeck - Flight Tracker", verdict: "RED", category: "Travel",
-    released: "2026-03-01", downloads: 4000, revenue: 17100, ads: "Active", rpd: 4.28,
-    stLink: "https://app.sensortower.com/overview/6759628645?country=US",
-    description: "Track airplanes in the sky live on a map.",
-    why: "Same problem as other flight tracker apps. Flightradar24 ($2.5M/mo) and Flighty ($1.2M/mo) own this space. FlightDeck pays for ads but can't win.",
-    findings: [
-      "PAID UA.",
-      "Free + Subscription.",
-      "$4.38 RPD.",
-      "Active ads."
-    ],
-    keywords: [
-      { term: "live flight tracker", count: 200, density: "medium", finding: "Flightradar24 1.7M DL/$2.5M, Flighty $1.2M, Planes Live $342K, FlightSky $82K", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=live+flight+tracker" },
-      { term: "flight tracker app", count: 150, density: "medium", finding: "Flightradar24 $2.5M, Planes Live $342K, Flight Tracker+ $265K, AirNav $30K", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=flight+tracker+app" },
-      { term: "flight radar live", count: 25, density: "empty", finding: "Plane Finder $130K, Flight Tracker+ $265K", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=flight+radar+live" }
-    ]
-  },
-  {
-    name: "RedChapters", verdict: "RED", category: "Books",
-    released: "2026-05-01", downloads: 4000, revenue: 11700, ads: "New", rpd: 2.92,
-    stLink: "https://app.sensortower.com/overview/6763258930?country=US",
-    description: "An app for reading werewolf and romance novels.",
-    why: "Werewolf romance and regular romance novels are too crowded. GoodNovel makes $8.7 million a month. RedChapters makes $12,000 — tiny in comparison.",
-    findings: [
-      "Werewolf Romance subtitle.",
-      "UAE publisher.",
-      "$2.86 RPD."
-    ],
-    keywords: [
-      { term: "werewolf romance", count: 150, density: "medium", finding: "GoodNovel $8.7M AnyStories $1.47M", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=werewolf+romance" },
-      { term: "romance novels", count: 1450, density: "saturated", finding: "GoodNovel $8.7M", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=romance+novels" },
-      { term: "web novel reader", count: 10, density: "empty", finding: "MoboReader $555K", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=web+novel+reader" }
-    ]
-  },
-  {
-    name: "IQ Boost: Brain Trainer, Games", verdict: "RED", category: "Education",
-    released: "2026-01-09", downloads: 43000, revenue: 108800, ads: "Active", rpd: 2.53,
-    stLink: "https://app.sensortower.com/overview/6755378185?country=US",
-    description: "Brain training puzzles and IQ tests.",
-    why: "Brain training is owned by huge apps like Impulse ($1.5M/mo), Elevate ($1.1M/mo), and Lumosity. Nothing left to win here.",
-    findings: [
-      "Active ads + keyword-rich ASO name targeting brain training searches.",
-      "$2.02 RPD decent monetization alongside paid UA."
-    ],
-    keywords: [
-      { term: "brain training games", count: 1775, density: "saturated", finding: "Impulse $1.49M, Elevate $1.11M, IQ Masters $707K", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=brain+training+games" },
-      { term: "iq test brain games", count: 25, density: "empty", finding: "only IQ Boost active. Too narrow.", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=iq+test+brain+games" },
-      { term: "brain puzzle games", count: 575, density: "heavy", finding: "Brain Puzzle 4.28M DL, Sudoku 1.45M DL", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=brain+puzzle+games" }
-    ]
-  },
-  {
-    name: "Staread", verdict: "RED", category: "Books",
-    released: "2026-03-23", downloads: 7000, revenue: 17200, ads: "N/A", rpd: 2.46,
-    stLink: "https://app.sensortower.com/overview/6758330296?country=US",
-    description: "Another app for reading novels and stories.",
-    why: "Romance and novel apps are owned by giants. Pocket FM makes $8.8 million a month. Staread's $17,000 is a drop in the bucket.",
-    findings: [
-      "Likely ORGANIC/ASO.",
-      "Both iOS+Android.",
-      "$2.15 RPD."
-    ],
-    keywords: [
-      { term: "novel reading", count: 1200, density: "saturated", finding: "Pocket FM $8.8M", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=novel+reading" },
-      { term: "romance novels", count: 1450, density: "saturated", finding: "GoodNovel $8.7M", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=romance+novels" },
-      { term: "web novel reader", count: 10, density: "empty", finding: "MoboReader $555K", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=web+novel+reader" }
-    ]
-  },
-  {
-    name: "CrushNovels", verdict: "RED", category: "Books",
-    released: "2026-02-24", downloads: 4000, revenue: 9000, ads: "Inactive", rpd: 2.25,
-    stLink: "https://app.sensortower.com/overview/6759941820?country=US",
-    description: "Another app for reading romance novels.",
-    why: "Same story as the other romance apps — way too crowded. Big leaders make millions. CrushNovels makes $9,000 a month. No path forward.",
-    findings: [
-      "ORGANIC/ASO.",
-      "Vietnamese publisher.",
-      "$1.58 RPD."
-    ],
-    keywords: [
-      { term: "romance novels", count: 1450, density: "saturated", finding: "GoodNovel $8.7M", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=romance+novels" },
-      { term: "novel reading", count: 1200, density: "saturated", finding: "Pocket FM $8.8M", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=novel+reading" },
-      { term: "web novel reader", count: 10, density: "empty", finding: "MoboReader $555K", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=web+novel+reader" }
-    ]
-  },
-  {
-    name: "Alarm Clock to Wake Up: Wayk", verdict: "RED", category: "Health & Fitness",
-    released: "2026-02-03", downloads: 124000, revenue: 172200, ads: "N/A", rpd: 1.39,
-    stLink: "https://app.sensortower.com/overview/6758021281?country=US",
-    description: "An alarm clock app with lots of sounds and features.",
-    why: "Alarm clock apps are super crowded — over 825 of them. Even the smaller corners have dozens of apps. Big names already own this space.",
-    findings: [
-      "Keyword-rich name \"alarm clock wake up\".",
-      "Strong $1.39 RPD. 124K downloads with $172K revenue in 3 months = organic ASO + likely paid UA."
-    ],
-    keywords: [
-      { term: "alarm clock wake up", count: 825, density: "saturated", finding: "massively crowded alarm market", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=alarm+clock+wake+up" },
-      { term: "smart alarm clock app", count: 75, density: "light", finding: "moderate competition in smart alarm niche", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=smart+alarm+clock+app" },
-      { term: "alarm clock heavy sleepers", count: 25, density: "empty", finding: "niche angle less crowded", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=alarm+clock+heavy+sleepers" }
-    ]
-  },
-  {
-    name: "Infinity Coloring Book: Infini", verdict: "RED", category: "Lifestyle",
-    released: "2026-01-14", downloads: 34000, revenue: 37100, ads: "Inactive", rpd: 1.09,
-    stLink: "https://app.sensortower.com/overview/6752579720?country=US",
-    description: "A coloring book app with pictures you can zoom into forever.",
-    why: "Coloring book apps are everywhere — 3,800 of them. The leaders make over $1 million a month each. The infinite zoom is cool but doesn't make it a new kind of app.",
-    findings: [
-      "ORGANIC / ASO.",
-      "App name contains highly searchable keywords.",
-      "Inactive ads.",
-      "Healthy $0.71 RPD."
-    ],
-    keywords: [
-      { term: "coloring book app", count: 3800, density: "saturated", finding: "massively crowded. Adult Coloring Book by Pixite 197K DLs/$438K rev.", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=coloring+book+app" },
-      { term: "color therapy paint", count: 25, density: "empty", finding: "narrow keyword. Same top competitors (Pixite #1).", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=color+therapy+paint" },
-      { term: "adult coloring book", count: 1550, density: "saturated", finding: "very crowded. Color Pop AI 1M+ DLs/$1.39M rev dominates. Pixite $438K. Tap Color Pro $107K.", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=adult+coloring+book" }
-    ]
-  },
-  {
-    name: "JoyNovel - Stories and Novels", verdict: "RED", category: "Books",
-    released: "2026-02-25", downloads: 1000, revenue: 1000, ads: "N/A", rpd: 1.0,
-    stLink: "https://app.sensortower.com/overview/6756647273?country=US",
-    description: "Another app for reading stories and novels.",
-    why: "Even though Hinovel is a big publisher, JoyNovel only makes $1,000 a month. That means the market is saying no to new entries.",
-    findings: [
-      "ORGANIC.",
-      "Hinovel group publisher.",
-      "$0.87 RPD."
-    ],
-    keywords: [
-      { term: "novel reading", count: 1200, density: "saturated", finding: "Pocket FM $8.8M", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=novel+reading" },
-      { term: "romance novels", count: 1450, density: "saturated", finding: "GoodNovel $8.7M", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=romance+novels" },
-      { term: "web novel reader", count: 10, density: "empty", finding: "MoboReader $555K", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=web+novel+reader" }
-    ]
-  },
-  {
-    name: "VibeShort: AI Comic Dramas", verdict: "RED", category: "Entertainment",
-    released: "2026-02-07", downloads: 3000000, revenue: 2700000, ads: "New", rpd: 0.9,
-    stLink: "https://app.sensortower.com/overview/6758667154?country=US",
-    description: "Watch short AI-made comic and drama videos, like TikTok for soap operas.",
-    why: "Looks like a small space at first, but it's the same people who watch short dramas. That bigger space has $1M+ apps. Too big to compete with as an indie.",
-    findings: [
-      "Brand name not searchable but 'AI Comic Dramas' subtitle targets differentiating niche.",
-      "New ads = just starting paid.",
-      "$2.7M/mo in 3 months suggests strong organic/viral growth.",
-      "$0.87 RPD solid."
-    ],
-    keywords: [
-      { term: "ai comic dramas", count: 3, density: "empty", finding: "1 page, 3 results. VibeShort dominates at $2.5M. MoboDrama 26 DLs/$2.7K. EpNova 0 DLs/$0.", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=ai+comic+dramas" },
-      { term: "short drama app", count: 125, density: "medium", finding: "5 pages ~125 results. Story TV 11M DLs/$73.6K, PineDrama (ByteDance) 17.9M DLs/$0, RaptDrama $318K.", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=short+drama+app" },
-      { term: "watch short dramas", count: 100, density: "light", finding: "4 pages ~100 results. StardustTV $2.8M, Playlet $1.18M, HotMiniDrama 11M DLs/$0.", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=watch+short+dramas" }
-    ]
-  },
-  {
-    name: "Mappa: GPS & Live Earth Camera", verdict: "RED", category: "Travel",
-    released: "2025-12-11", downloads: 57000, revenue: 21800, ads: "Inactive", rpd: 0.38,
-    stLink: "https://app.sensortower.com/overview/6756056112?country=US",
-    description: "Shows live satellite views of Earth and a GPS map.",
-    why: "Too crowded — over 150 copycat earth camera apps. Live Earth Map already wins with $137,000 a month. This is a race to be the cheapest.",
-    findings: [
-      "ORGANIC / ASO.",
-      "Zero ads.",
-      "Keyword-stuffed title.",
-      "Vietnam publisher."
-    ],
-    keywords: [
-      { term: "live earth camera", count: 150, density: "medium", finding: "packed with clones: Live Earth Map 1.2M DLs / GPS Satellite 463K DLs", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=live+earth+camera" },
-      { term: "3d earth map", count: 150, density: "medium", finding: "same clone market. Live Earth Map $137K/mo dominates", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=3d+earth+map" },
-      { term: "gps live satellite view", count: 25, density: "empty", finding: "mostly dead apps with 0 downloads", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=gps+live+satellite+view" }
-    ]
-  },
-  {
-    name: "Plotline: Travel Map & Planner", verdict: "RED", category: "Travel",
-    released: "2026-03-17", downloads: 8000, revenue: 2000, ads: "Active", rpd: 0.25,
-    stLink: "https://app.sensortower.com/overview/6759443026?country=US",
-    description: "Plan your trips on a map with stops and itineraries.",
-    why: "Travel planner apps are saturated. Wanderlog and TripIt are the big ones. Plus ChatGPT is killing manual travel planning. $0.27 per user — very bad.",
-    findings: [
-      "PAID UA + low conversion.",
-      "$0.27 RPD = users not converting.",
-      "Subscription model.",
-      "Active ads in saturated travel planner space dominated by Wanderlog/TripIt + AI assistants cannibalizing manual planning."
-    ],
-    keywords: [
-      { term: "travel planner app", count: 125, density: "medium", finding: "Wanderlog 349K DL/$567K, TripIt 78K DL/$187K, SmartGuide $17K", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=travel+planner+app" },
-      { term: "trip planner map", count: 50, density: "empty", finding: "mostly dead. Tripomatic $9K, TripShot 14K DL/$0", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=trip+planner+map" },
-      { term: "travel itinerary", count: 1650, density: "saturated", finding: "ChatGPT/TripIt/Hostelworld/Priceline. AI-cannibalized space", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=travel+itinerary" }
-    ]
-  },
-  {
-    name: "Famircle: Family Locator", verdict: "RED", category: "Lifestyle",
-    released: "2026-03-12", downloads: 89000, revenue: 13700, ads: "N/A", rpd: 0.15,
-    stLink: "https://app.sensortower.com/overview/6758696583?country=US",
-    description: "Shows where each family member is on a map.",
-    why: "Life360 and GeoZilla own the family location app space. Famircle's $14,000 a month is tiny compared to GeoZilla's $368,000.",
-    findings: [
-      "ORGANIC.",
-      "Name combines family + circle.",
-      "Family location sharing app from Chinese publisher."
-    ],
-    keywords: [
-      { term: "family location sharing", count: 125, density: "medium", finding: "GeoZilla $368K/mo dominates. Established market.", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=family+location+sharing" },
-      { term: "family tracker gps", count: 8, density: "empty", finding: "mostly dead small apps", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=family+tracker+gps" },
-      { term: "find my family location", count: 5, density: "empty", finding: "all tiny inactive apps", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=find+my+family+location" }
-    ]
-  },
-  {
-    name: "Pydroid 3", verdict: "RED", category: "Developer Tools",
-    released: "2026-01-27", downloads: 20000, revenue: 2000, ads: "Inactive", rpd: 0.1,
-    stLink: "https://app.sensortower.com/overview/6758005480?country=US",
-    description: "Lets you write and run Python code on your phone.",
-    why: "Python coding on phones is small and already has a leader. Pydroid 3 only makes $2,000 a month with terrible pay per user. Looks like a copycat of an Android app.",
-    findings: [
-      "ORGANIC.",
-      "Name 'Pydroid 3' leverages famous Android brand.",
-      "Subtitle 'Pythonista Compiler Coding App' keyword-stuffed.",
-      "No ads."
-    ],
-    keywords: [
-      { term: "python code editor", count: 15, density: "empty", finding: "Python Coding (77K DLs, $8.9K) dominates. Python3ide (6.5K, $2.2K). Pydroid 3 itself at 19.7K DLs.", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=python+code+editor" },
-      { term: "python compiler", count: 100, density: "light", finding: "Python3ide (6.5K, $2.2K), Python Coding IDE (3.4K), Learn Python (3.6K, $760). Many dead apps.", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=python+compiler" },
-      { term: "python programming app", count: 50, density: "empty", finding: "Mostly dead apps with 0 downloads. Only Learn Python Coding (1.7K DLs) has any traction.", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=python+programming+app" }
-    ]
-  },
-  {
-    name: "Dilemmo: Make Better Decisions", verdict: "RED", category: "Education",
-    released: "2026-02-08", downloads: 46000, revenue: 4000, ads: "New", rpd: 0.09,
-    stLink: "https://app.sensortower.com/overview/6758148536?country=US",
-    description: "Personality tests and 'would you rather' style decision games.",
-    why: "Personality tests have 1,875 apps. Each user only pays $0.07 — that's basically nothing. They're buying cheap downloads from people who don't pay.",
-    findings: [
-      "PAID UA.",
-      "Brand name not searchable.",
-      "$0.07 RPD extremely low — buying cheap installs that don't convert. 46K DLs/$4K rev = purchased traffic."
-    ],
-    keywords: [
-      { term: "personality test", count: 1875, density: "saturated", finding: "Duet Dating $493.6K, Clever $302K, HalaMe $81.8K. Extremely crowded.", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=personality+test" },
-      { term: "would you rather game", count: 150, density: "medium", finding: "Rather Dirty $2.3K. Nobody making real money.", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=would+you+rather+game" },
-      { term: "decision making app", count: 250, density: "medium", finding: "dead category. All apps near 0 DL and $0 revenue.", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=decision+making+app" }
-    ]
-  },
-  {
-    name: "Sky Radar: Live Flights", verdict: "RED", category: "Travel",
-    released: "2026-02-05", downloads: 86000, revenue: 2000, ads: "Active", rpd: 0.02,
-    stLink: "https://app.sensortower.com/overview/6758307448?country=US",
-    description: "Track airplanes in the sky live on a map.",
-    why: "Way too many flight tracker apps already — over 175. Big leaders like Flightradar24 ($2.5M a month) and Flighty ($1.2M) own this space. Sky Radar buys ads but users don't pay — wasting money.",
-    findings: [
-      "PAID UA.",
-      "Sky Radar is a brand name. 86K DLs with only $2K rev = $0.02 RPD.",
-      "Active ads.",
-      "Buying chart position but users dont convert."
-    ],
-    keywords: [
-      { term: "live flight tracker", count: 175, density: "medium", finding: "Flightradar24 $2.5M/mo / Flighty $1.2M/mo / FlightAware $48K/mo", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=live+flight+tracker" },
-      { term: "flight tracker live", count: 60, density: "light", finding: "same crowded market different angle", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=flight+tracker+live" },
-      { term: "live air traffic", count: 100, density: "light", finding: "overlaps with App 1. Confirms same crowded space", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=live+air+traffic" }
-    ]
-  },
-  {
-    name: "Glowly AI", verdict: "RED", category: "Lifestyle",
-    released: "2026-01-07", downloads: 7000, revenue: 108, ads: "N/A", rpd: 0.02,
-    stLink: "https://app.sensortower.com/overview/6755280295?country=US",
-    description: "Scans your face with AI and tells you about your skin.",
-    why: "AI skin scanner space has 150+ apps. Glowly makes only $108 a month — almost nothing.",
-    findings: [
-      "ORGANIC.",
-      "AI skin analysis app with terrible monetization.",
-      "$108/mo from 7K downloads = $0.01 RPD."
-    ],
-    keywords: [
-      { term: "ai skin analysis", count: 150, density: "medium", finding: "PerfectSkin 85K DLs leads. Crowded AI beauty market.", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=ai+skin+analysis" },
-      { term: "skin care ai scanner", count: 2, density: "empty", finding: "overlapping AI skincare niche", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=skin+care+ai+scanner" },
-      { term: "face skin analyzer", count: 3, density: "empty", finding: "generic face analysis market", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=face+skin+analyzer" }
-    ]
-  },
-  {
-    name: "Buz tv Matches", verdict: "RED", category: "Lifestyle",
-    released: "2026-05-01", downloads: 10000, revenue: 0, ads: "N/A", rpd: 0.0,
-    stLink: "https://app.sensortower.com/overview/6762491074?country=US",
-    description: "Shows schedules and scores for sports matches on TV.",
-    why: "Sports streaming apps are owned by huge companies. This new app makes zero dollars. No way to stand out.",
-    findings: [
-      "ORGANIC.",
-      "TV match schedule/results app.",
-      "Very new (May 1).",
-      "Zero revenue."
-    ],
-    keywords: [
-      { term: "tv show schedule", count: 3, density: "empty", finding: "moderate TV schedule competition", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=tv+show+schedule" },
-      { term: "live tv matches", count: 2, density: "empty", finding: "sports TV streaming apps", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=live+tv+matches" },
-      { term: "sports matches live", count: 5, density: "empty", finding: "crowded sports streaming/scores market", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=sports+matches+live" }
-    ]
-  },
-  {
-    name: "Maya Mobile: Travel eSIM", verdict: "RED", category: "Travel",
-    released: "2026-03-23", downloads: 10000, revenue: 0, ads: "Active", rpd: 0.0,
-    stLink: "https://app.sensortower.com/overview/6760292613?country=US",
-    description: "Buy phone data plans for traveling abroad.",
-    why: "Travel eSIM apps are packed with 350+ competitors backed by big companies. Maya makes $0 in the app — wasting money on ads.",
-    findings: [
-      "PAID UA in saturated travel eSIM space.",
-      "Free app no IAP visible — likely revenue from data plan purchases off-app. 10K DL / $0 in-app rev = chasing brand recognition vs Saily/Ubigi/Nomad."
-    ],
-    keywords: [
-      { term: "travel esim", count: 350, density: "heavy", finding: "Saily 653K DL, Ubigi 196K, Maslek 152K, Nomad-style giants", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=travel+esim" },
-      { term: "international esim", count: 100, density: "light", finding: "Saily 653K, Nomad 266K, Hoi 225K, MobiMatter 149K", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=international+esim" },
-      { term: "esim data plan", count: 100, density: "light", finding: "Numero $215K/mo rev, Second Phone $90K/mo, Saily 653K DL", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=esim+data+plan" }
-    ]
-  },
-  {
-    name: "Rugiet: Men's health", verdict: "RED", category: "Medical",
-    released: "2026-04-21", downloads: 9000, revenue: 0, ads: "Inactive", rpd: 0.0,
-    stLink: "https://app.sensortower.com/overview/6760044352?country=US",
-    description: "Telehealth for men, similar to Hims — get prescriptions online.",
-    why: "Telehealth is super crowded — Hims, Roman, Keeps own this. You'd need a real medical company behind you. Not something a regular team can build.",
-    findings: [
-      "OFF-APP MONETIZATION.",
-      "Brand telehealth like Hims/Roman/Keeps.",
-      "$0 in-app rev = revenue from prescription sales off-app.",
-      "Requires medical licensing + business backing — not clonable as standalone app."
-    ],
-    keywords: [
-      { term: "telehealth", count: 3150, density: "saturated", finding: "Hims 100K DL, Teladoc 168K, GoodRx 282K, LifeMD 50K, healow 381K, Zocdoc 125K", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=telehealth" },
-      { term: "(KW2 skipped — verdict overwhelmingly clear)", count: 100, density: "light", finding: "", link: "" },
-      { term: "(KW3 skipped — verdict overwhelmingly clear)", count: 100, density: "light", finding: "", link: "" }
-    ]
-  },
-  {
-    name: "Wisp: Online Healthcare", verdict: "RED", category: "Medical",
-    released: "2026-04-06", downloads: 4000, revenue: 0, ads: "Inactive", rpd: 0.0,
-    stLink: "https://app.sensortower.com/overview/6755340669?country=US",
-    description: "Telehealth for UTI and STD treatments — get prescriptions online.",
-    why: "Same problem as Rugiet — telehealth needs medical licensing and a real prescription business. Not buildable as just an app.",
-    findings: [
-      "OFF-APP MONETIZATION.",
-      "UTI/STD telehealth brand.",
-      "$0 in-app rev = revenue from prescription sales off-app.",
-      "Same brand-Rx pattern as Hims/Roman/Rugiet."
-    ],
-    keywords: [
-      { term: "telehealth", count: 3150, density: "saturated", finding: "same as Rugiet KW1. Hims/Teladoc/GoodRx/LifeMD/healow dominate", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=telehealth" }
-    ]
-  },
-  {
-    name: "Dutch Pet - Online vet 24/7", verdict: "RED", category: "Medical",
-    released: "2026-03-10", downloads: 4000, revenue: 0, ads: "N/A", rpd: 0.0,
-    stLink: "https://app.sensortower.com/overview/6745529739?country=US",
-    description: "Telehealth for pets — talk to a vet online 24/7.",
-    why: "Telehealth for pets needs vet partnerships and a real business behind it. Not buildable as just an app.",
-    findings: [
-      "OFF-APP MONETIZATION.",
-      "Brand telehealth-for-pets (Dutch).",
-      "$0 in-app rev = revenue from vet visits/Rx off-app.",
-      "Pet equivalent of Hims model."
-    ],
-    keywords: [
-      { term: "online vet", count: 225, density: "empty", finding: "Vetster 4.7K, Supertails 63K, TrustedHousesitters 37K. ALL near-$0 in-app rev (off-app vet visit monetization). PetWiseCare $4.4K only outlier", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=online+vet" }
-    ]
-  },
-  {
-    name: "Lingua - AI Learn English", verdict: "RED", category: "Education",
-    released: "2026-04-16", downloads: 18000, revenue: 0, ads: "New", rpd: 0.0,
-    stLink: "https://app.sensortower.com/overview/6762179191?country=US",
-    description: "Practice speaking English with an AI tutor.",
-    why: "English learning apps are owned by giants like Speak ($3.5M/mo) and Stimuler ($285K/mo). Lingua makes zero dollars. No path.",
-    findings: [
-      "PAID UA starting (New ads).",
-      "Vietnamese pub targeting India/Pakistan.",
-      "$0 in-app rev = burning UA in saturated AI English space."
-    ],
-    keywords: [
-      { term: "learn english ai", count: 14, density: "empty", finding: "SPEAKEY $5.6K leads narrow keyword", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=learn+english+ai" },
-      { term: "english speaking practice", count: 575, density: "heavy", finding: "Stimuler AI 997K DL/$285K/mo, Speak $3.5M, ELSA $735K. Saturated", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=english+speaking+practice" }
-    ]
-  },
-  {
-    name: "GetMyPermit - DMV Permit Test", verdict: "RED", category: "Education",
-    released: "2026-02-05", downloads: 11000, revenue: 0, ads: "N/A", rpd: 0.0,
-    stLink: "https://app.sensortower.com/overview/6754830799?country=US",
-    description: "Practice tests to help you pass the DMV permit exam.",
-    why: "DMV permit apps are crowded and Zutobi already makes $488,000 a month. GetMyPermit makes zero. No way to break in.",
-    findings: [
-      "ORGANIC.",
-      "Free + IAP/Subs but $0 rev = monetization not converting.",
-      "Crowded DMV market dominated by big incumbents."
-    ],
-    keywords: [
-      { term: "dmv permit test", count: 1075, density: "saturated", finding: "Zutobi 145K DL/$488K/mo, DMV Permit Practice $230K/mo dominate", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=dmv+permit+test" }
-    ]
-  },
-  {
-    name: "Pinu – Language Learning", verdict: "RED", category: "Education",
-    released: "2026-03-11", downloads: 10000, revenue: 0, ads: "N/A", rpd: 0.0,
-    stLink: "https://app.sensortower.com/overview/6758291757?country=US",
-    description: "Yet another language learning app, competing with Duolingo.",
-    why: "Language learning is the most crowded category on mobile. Duolingo alone makes $48 million a month. Pinu makes zero. Impossible to compete here.",
-    findings: [
-      "ORGANIC.",
-      "Generic brand name.",
-      "Free no IAP.",
-      "Trying to enter THE most saturated mobile category."
-    ],
-    keywords: [
-      { term: "language learning app", count: 3400, density: "saturated", finding: "Duolingo 16.6M DL/$48M/mo, Speak $3.5M, Learna $6M, Mondly $850K", link: "https://app.sensortower.com/search?entity_type=app&os=unified&device=iphone&device=ipad&device=android&search_by=name&search_by=description&search_by=subtitle&page=1&page_size=25&term=language+learning+app" }
-    ]
+let APPS = []; // Loaded from apps.csv at runtime — see loadAppsFromCSV()
+
+// ── CSV LOADING ─────────────────────────────────
+// Fetches apps.csv from the repo, parses it, normalizes into the APPS array.
+// Runs once on page load before the first render.
+
+const CSV_FILENAME = 'apps.csv';
+
+async function loadAppsFromCSV() {
+  if (GITHUB_CONFIG.owner.startsWith('YOUR_')) {
+    showLoadError('GITHUB_CONFIG not set — cannot fetch CSV.');
+    return false;
   }
-];
+
+  const url = `https://raw.githubusercontent.com/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/${GITHUB_CONFIG.branch}/${CSV_FILENAME}?_=${Date.now()}`;
+
+  try {
+    const res = await fetch(url, { cache: 'no-store' });
+    if (!res.ok) {
+      throw new Error(`HTTP ${res.status} — is ${CSV_FILENAME} in the repo root?`);
+    }
+    const csvText = await res.text();
+    APPS = parseCsvToApps(csvText);
+    if (APPS.length === 0) {
+      throw new Error('CSV parsed but yielded zero apps. Check column headers.');
+    }
+    return true;
+  } catch (e) {
+    console.error('[AI Hunter CSV load]', e);
+    showLoadError(`Failed to load ${CSV_FILENAME}: ${e.message}`);
+    return false;
+  }
+}
+
+function showLoadError(msg) {
+  const results = document.getElementById('results');
+  if (results) {
+    results.innerHTML = `<div class="empty-state" style="color: var(--red); border-color: var(--red-rule); background: var(--red-bg);">⚠ ${msg}</div>`;
+  }
+}
+
+// ── CSV parser ─────────────────────────────────
+// RFC 4180-ish: handles quoted fields, commas inside quotes, escaped quotes (""),
+// and CRLF/LF line endings. Returns an array of row objects keyed by header name.
+function parseCsv(text) {
+  const rows = [];
+  let row = [];
+  let field = '';
+  let inQuotes = false;
+  let i = 0;
+
+  // Normalize line endings
+  text = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+
+  while (i < text.length) {
+    const c = text[i];
+    if (inQuotes) {
+      if (c === '"') {
+        if (text[i + 1] === '"') {
+          field += '"';
+          i += 2;
+        } else {
+          inQuotes = false;
+          i++;
+        }
+      } else {
+        field += c;
+        i++;
+      }
+    } else {
+      if (c === '"') {
+        inQuotes = true;
+        i++;
+      } else if (c === ',') {
+        row.push(field);
+        field = '';
+        i++;
+      } else if (c === '\n') {
+        row.push(field);
+        rows.push(row);
+        row = [];
+        field = '';
+        i++;
+      } else {
+        field += c;
+        i++;
+      }
+    }
+  }
+  // Flush final field/row
+  if (field.length > 0 || row.length > 0) {
+    row.push(field);
+    rows.push(row);
+  }
+
+  // Convert to objects using the first row as headers
+  if (rows.length === 0) return [];
+  const headers = rows[0].map(h => h.trim());
+  const out = [];
+  for (let r = 1; r < rows.length; r++) {
+    const cells = rows[r];
+    // Skip fully-empty rows
+    if (cells.every(c => !c || !c.trim())) continue;
+    const obj = {};
+    for (let h = 0; h < headers.length; h++) {
+      obj[headers[h]] = (cells[h] !== undefined ? cells[h] : '').trim();
+    }
+    out.push(obj);
+  }
+  return out;
+}
+
+// ── Transform raw CSV rows into APP objects matching the dashboard's expected shape
+function parseCsvToApps(csvText) {
+  const rows = parseCsv(csvText);
+  const apps = [];
+
+  for (const row of rows) {
+    const name = row['App Name'];
+    if (!name) continue;
+
+    const downloads = parseNumber(row['Last 30D Downloads WW']);
+    const revenue = parseNumber(row['Last 30D Revenue WW']);
+    const rpd = downloads > 0 ? Math.round((revenue / downloads) * 100) / 100 : 0;
+
+    const verdict = parseVerdict(row['Market Verdict']);
+
+    const keywords = [];
+    for (const i of [1, 2, 3]) {
+      const term = row[`Keyword ${i}`];
+      const results = row[`KW${i} Results`] || '';
+      const link = row[`KW${i} Advanced Search Link`] || '';
+      if (!term || term.toLowerCase().startsWith('(skipped')) continue;
+      const count = extractCount(results);
+      const density = densityLabel(count, results);
+      const finding = extractFinding(results);
+      keywords.push({
+        term: term,
+        count: count >= 0 ? count : 100,
+        density: density,
+        finding: finding,
+        link: link
+      });
+    }
+
+    const findings = splitFindings(row['How They Get Their Money'] || '');
+
+    apps.push({
+      name: name,
+      verdict: verdict,
+      category: row['Category'] || '',
+      released: row['Release Date'] || '',
+      downloads: downloads,
+      revenue: revenue,
+      ads: normalizeAds(row['Ads Network']),
+      rpd: rpd,
+      stLink: row['Sensor Tower Link'] || '',
+      description: row['Description'] || '',
+      why: row['Why Simple'] || '',
+      findings: findings,
+      keywords: keywords
+    });
+  }
+
+  return apps;
+}
+
+function parseNumber(s) {
+  if (!s) return 0;
+  const cleaned = String(s).replace(/[\$,\s]/g, '');
+  const n = parseInt(cleaned, 10);
+  return isNaN(n) ? 0 : n;
+}
+
+function parseVerdict(s) {
+  if (!s) return 'YELLOW';
+  const upper = s.toUpperCase();
+  if (upper.includes('GREEN') || s.includes('🟢')) return 'GREEN';
+  if (upper.includes('RED') || s.includes('🔴')) return 'RED';
+  return 'YELLOW';
+}
+
+function normalizeAds(s) {
+  if (!s) return 'N/A';
+  const lower = s.toLowerCase();
+  if (lower.startsWith('inactive')) return 'Inactive';
+  if (lower.startsWith('active')) return 'Active';
+  if (lower.startsWith('new')) return 'New';
+  if (lower.includes('not extracted') || lower === 'n/a' || !s.trim()) return 'N/A';
+  return s;
+}
+
+function extractCount(text) {
+  if (!text) return -1;
+  const lower = text.toLowerCase();
+  if (lower.startsWith('(skipped') || lower.startsWith('(not extracted')) return -1;
+
+  let m = text.match(/~\s*([\d,]+)/);
+  if (m) return parseInt(m[1].replace(/,/g, ''), 10);
+  m = text.match(/([\d,]+)\s*results?/i);
+  if (m) return parseInt(m[1].replace(/,/g, ''), 10);
+  m = text.match(/(\d+)\s*(?:\+|result)/);
+  if (m) return parseInt(m[1], 10);
+  m = text.match(/(\d+)\s*pages?/i);
+  if (m) return parseInt(m[1], 10) * 25;
+  return -1;
+}
+
+function densityLabel(count, resultsText) {
+  const t = (resultsText || '').toLowerCase();
+
+  // Strong "empty" signals — niche is functionally wide open
+  const emptySignals = [
+    'all dead', 'mostly dead', 'all with 0', 'all w/ 0', 'all 0 dl',
+    '0 downloads', '0 dls/$0', 'all near 0', 'all near-$0',
+    'niche empty', 'niche completely empty', 'completely empty',
+    'no real player', 'only 1 dead', 'only 1 active', 'only one real',
+    'no established players', 'no 3rd real', 'no dominant',
+    'mostly poker games'
+  ];
+  if (emptySignals.some(sig => t.includes(sig))) return 'empty';
+
+  // "dominates" in a small niche is also an empty signal
+  if (count > 0 && count <= 75 && (t.includes('dominate') || t.includes('leads') || t.includes('sole real'))) {
+    return 'empty';
+  }
+
+  if (count < 0) return 'light';
+  if (count <= 25) return 'empty';
+  if (count <= 100) return 'light';
+  if (count <= 250) return 'medium';
+  if (count <= 800) return 'heavy';
+  return 'saturated';
+}
+
+function extractFinding(text) {
+  if (!text) return '';
+  const s = text.trim();
+  if (s.includes('—')) {
+    const parts = s.split('—');
+    return parts[parts.length - 1].trim();
+  }
+  if (s.includes(' - ') && s.split(' - ')[0].toLowerCase().includes('result')) {
+    return s.split(' - ').slice(1).join(' - ').trim();
+  }
+  return s;
+}
+
+function splitFindings(monetization) {
+  if (!monetization) return [];
+  const s = monetization.trim();
+  // Split on '. ' but keep meaningful chunks
+  const chunks = s.split(/\.\s+(?=[A-Z\$])/);
+  const findings = [];
+  for (const c of chunks) {
+    const trimmed = c.trim().replace(/\.$/, '');
+    if (trimmed && trimmed.length > 5) findings.push(trimmed + '.');
+  }
+  return findings.slice(0, 5);
+}
 
 // ── GITHUB SYNC CONFIG ─────────────────────────────────
 // FILL THESE IN with your repo details before deploying.
@@ -2035,48 +1396,7 @@ const GITHUB_CONFIG = {
 // Decisions baked into this file. Auto-updated by the dashboard via the GitHub API.
 // DO NOT manually edit this block — the dashboard rewrites it on every save.
 // ── DECISIONS START ──
-const BAKED_DECISIONS = {
-  "Runout Poker Trainer GTO Coach": {
-    "status": "do",
-    "at": "2026-05-16T11:15:37.624Z"
-  },
-  "Stella - Manifest Anything": {
-    "status": "skip",
-    "at": "2026-05-16T11:16:12.657Z"
-  },
-  "That Girl: Become a Clean Girl": {
-    "status": "skip",
-    "at": "2026-05-16T11:16:21.323Z"
-  },
-  "Safe Choice - Product Scanner": {
-    "status": "interesting",
-    "at": "2026-05-16T11:16:27.473Z"
-  },
-  "Himyo – Your Way, Your Pace": {
-    "status": "skip",
-    "at": "2026-05-16T11:16:54.156Z"
-  },
-  "Localize - Farmers Market": {
-    "status": "interesting",
-    "at": "2026-05-16T11:16:57.240Z"
-  },
-  "Pep AI - Peptide Tracker": {
-    "status": "interesting",
-    "at": "2026-05-16T11:17:00.373Z"
-  },
-  "ATC - Live Air Traffic Radio": {
-    "status": "interesting",
-    "at": "2026-05-16T11:17:02.256Z"
-  },
-  "Sports Card Scanner: Spoly": {
-    "status": "interesting",
-    "at": "2026-05-16T11:17:05.123Z"
-  },
-  "Areum": {
-    "status": "interesting",
-    "at": "2026-05-16T11:17:08.906Z"
-  }
-};
+const BAKED_DECISIONS = {};
 // ── DECISIONS END ──
 
 // ── BUILD ─────────────────────────────────────────────────────
@@ -2258,33 +1578,60 @@ async function syncToGitHub(isRetry = false) {
 async function pullFromGitHub() {
   // On page load, fetch the latest version of this file from GitHub to pick up
   // any decisions other team members made since the cached version we loaded.
+  //
+  // This works WITHOUT a token (public repo reads don't need auth), which means
+  // incognito/anonymous viewers also see the latest state — they just can't save.
   if (GITHUB_CONFIG.owner.startsWith('YOUR_')) return;
-  const token = getToken();
-  if (!token) return;
 
   try {
-    const apiBase = `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/${GITHUB_CONFIG.path}?ref=${GITHUB_CONFIG.branch}`;
-    const res = await fetch(apiBase, {
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Accept': 'application/vnd.github+json',
-        'X-GitHub-Api-Version': '2022-11-28'
-      }
-    });
-    if (!res.ok) return;
-    const data = await res.json();
-    const content = decodeURIComponent(escape(atob(data.content.replace(/\n/g, ''))));
-    const m = content.match(/\/\/ ── DECISIONS START ──\nconst BAKED_DECISIONS = (\{[\s\S]*?\});\n\/\/ ── DECISIONS END ──/);
-    if (m) {
+    const token = getToken();
+    // Use the raw.githubusercontent.com endpoint with a cache-buster — this is
+    // public for public repos, no token needed, and bypasses the GitHub Pages CDN.
+    const rawUrl = `https://raw.githubusercontent.com/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/${GITHUB_CONFIG.branch}/${GITHUB_CONFIG.path}?_=${Date.now()}`;
+
+    const fetchOpts = { cache: 'no-store' };
+    if (token) {
+      fetchOpts.headers = { 'Authorization': `Bearer ${token}` };
+    }
+
+    const res = await fetch(rawUrl, fetchOpts);
+    if (!res.ok) {
+      // Fall back to the API endpoint if raw fails (e.g. private repo without token)
+      if (!token) return;
+      const apiBase = `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/${GITHUB_CONFIG.path}?ref=${GITHUB_CONFIG.branch}&_=${Date.now()}`;
+      const apiRes = await fetch(apiBase, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Accept': 'application/vnd.github+json',
+          'X-GitHub-Api-Version': '2022-11-28'
+        },
+        cache: 'no-store'
+      });
+      if (!apiRes.ok) return;
+      const data = await apiRes.json();
+      const content = decodeURIComponent(escape(atob(data.content.replace(/\n/g, ''))));
+      applyFreshDecisions(content);
+      return;
+    }
+    const content = await res.text();
+    applyFreshDecisions(content);
+  } catch (e) {
+    console.warn('[AI Hunter] Pull-on-load failed:', e);
+  }
+}
+
+function applyFreshDecisions(content) {
+  const m = content.match(/\/\/ ── DECISIONS START ──\nconst BAKED_DECISIONS = (\{[\s\S]*?\});\n\/\/ ── DECISIONS END ──/);
+  if (m) {
+    try {
       const fresh = JSON.parse(m[1]);
-      // Replace state.decisions with the freshest copy from the repo
       state.decisions = fresh;
       updateTabCounts();
       renderReccoPanel();
       render();
+    } catch (e) {
+      console.warn('[AI Hunter] Could not parse fresh decisions:', e);
     }
-  } catch (e) {
-    console.warn('[AI Hunter] Pull-on-load failed:', e);
   }
 }
 
@@ -2704,14 +2051,51 @@ function wireDecisionClick(e) {
   card.replaceWith(replacement);
 }
 
-function init() {
-  // Decisions already initialized from BAKED_DECISIONS at script load.
-  // Set up sync indicator and token dialog wiring.
+async function init() {
+  // Show a loading indicator immediately
+  const results = document.getElementById('results');
+  if (results) {
+    results.innerHTML = '<div class="empty-state">Loading apps from apps.csv…</div>';
+  }
+
+  // Set up sync indicator and token dialog wiring upfront
   updateSyncIndicator();
   if (!getToken() && !GITHUB_CONFIG.owner.startsWith('YOUR_')) {
     SYNC.status = 'no-token';
     updateSyncIndicator();
   }
+
+  // Wire the token dialog now — independent of CSV load
+  document.getElementById('sync-indicator').addEventListener('click', () => {
+    showTokenDialog();
+  });
+  document.getElementById('modal-repo-name').textContent =
+    `${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}`;
+  document.getElementById('token-cancel').addEventListener('click', hideTokenDialog);
+  document.getElementById('token-clear').addEventListener('click', () => {
+    if (confirm('Clear the stored GitHub token? You will need to paste it again to save decisions.')) {
+      clearToken();
+      hideTokenDialog();
+      SYNC.status = 'no-token';
+      updateSyncIndicator();
+    }
+  });
+  document.getElementById('token-save').addEventListener('click', () => {
+    const v = document.getElementById('token-input').value.trim();
+    if (!v) return;
+    setToken(v);
+    hideTokenDialog();
+    SYNC.status = 'idle';
+    updateSyncIndicator();
+    scheduleSyncToGitHub();
+  });
+  document.getElementById('token-dialog').addEventListener('click', (e) => {
+    if (e.target.id === 'token-dialog') hideTokenDialog();
+  });
+
+  // Load the CSV — this is the new step
+  const ok = await loadAppsFromCSV();
+  if (!ok) return;  // loadAppsFromCSV showed an error; nothing else to do
 
   // counts
   const counts = { GREEN: 0, YELLOW: 0, RED: 0 };
@@ -2775,38 +2159,6 @@ function init() {
   catSel.addEventListener('change', e => { state.category = e.target.value; render(); });
   adsSel.addEventListener('change', e => { state.ads = e.target.value; render(); });
   document.getElementById('search').addEventListener('input', e => { state.search = e.target.value; render(); });
-
-  // Sync indicator opens the token dialog
-  document.getElementById('sync-indicator').addEventListener('click', () => {
-    showTokenDialog();
-  });
-
-  // Token dialog wiring
-  document.getElementById('modal-repo-name').textContent =
-    `${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}`;
-  document.getElementById('token-cancel').addEventListener('click', hideTokenDialog);
-  document.getElementById('token-clear').addEventListener('click', () => {
-    if (confirm('Clear the stored GitHub token? You will need to paste it again to save decisions.')) {
-      clearToken();
-      hideTokenDialog();
-      SYNC.status = 'no-token';
-      updateSyncIndicator();
-    }
-  });
-  document.getElementById('token-save').addEventListener('click', () => {
-    const v = document.getElementById('token-input').value.trim();
-    if (!v) return;
-    setToken(v);
-    hideTokenDialog();
-    SYNC.status = 'idle';
-    updateSyncIndicator();
-    // Try an immediate sync to verify the token works
-    scheduleSyncToGitHub();
-  });
-  // Close on backdrop click
-  document.getElementById('token-dialog').addEventListener('click', (e) => {
-    if (e.target.id === 'token-dialog') hideTokenDialog();
-  });
 
   renderReccoPanel();
   render();
