@@ -779,250 +779,6 @@
   .card.decided.interesting { background: linear-gradient(to right, var(--orange-bg) 0%, var(--paper) 8%); }
   .card.decided.skip { background: linear-gradient(to right, var(--red-bg) 0%, var(--paper) 8%); }
 
-  /* ── RECOMMENDATION PANEL ───────────────────────────────────── */
-  .recco-panel {
-    margin-bottom: 32px;
-    padding: 0;
-    background: var(--paper);
-    border: 1px solid var(--ink);
-    border-top-width: 3px;
-  }
-  .recco-header {
-    padding: 14px 20px 12px;
-    border-bottom: 1px solid var(--rule);
-    background: var(--paper-tint);
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 16px;
-    flex-wrap: wrap;
-  }
-  .recco-title {
-    font-family: var(--sans);
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--ink);
-  }
-  .recco-sub {
-    font-family: var(--mono);
-    font-size: 10.5px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-  }
-
-  .recco-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0;
-  }
-  .recco-col {
-    padding: 18px 20px 20px;
-  }
-  .recco-col + .recco-col { border-left: 1px solid var(--rule); }
-
-  .recco-col-head {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 14px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--rule-soft);
-  }
-  .recco-col-label {
-    font-family: var(--mono);
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    padding: 4px 8px;
-    color: #fff;
-  }
-  .recco-col.green .recco-col-label { background: var(--green); }
-  .recco-col.yellow .recco-col-label { background: var(--yellow); }
-  .recco-col-title {
-    font-family: var(--sans);
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--ink);
-    letter-spacing: -0.01em;
-  }
-  .recco-col-hint {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.06em;
-    color: var(--ink-faint);
-    margin-left: auto;
-  }
-
-  .recco-list {
-    list-style: none;
-    counter-reset: rank;
-  }
-  .recco-item {
-    display: grid;
-    grid-template-columns: 22px 1fr auto;
-    gap: 12px;
-    padding: 11px 0;
-    border-bottom: 1px dotted var(--rule);
-    cursor: pointer;
-    transition: background 0.12s;
-    counter-increment: rank;
-    align-items: center;
-  }
-  .recco-item:last-child { border-bottom: none; }
-  .recco-item:hover { background: var(--paper-tint); }
-  .recco-item:hover .recco-name { color: var(--ink); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
-
-  .recco-rank {
-    font-family: var(--serif);
-    font-size: 22px;
-    font-weight: 600;
-    color: var(--ink-faint);
-    letter-spacing: -0.04em;
-    line-height: 1;
-    text-align: center;
-  }
-  .recco-rank::before { content: counter(rank); }
-  .recco-item:nth-child(1) .recco-rank { color: var(--ink); }
-
-  .recco-body { min-width: 0; }
-  .recco-name {
-    font-family: var(--sans);
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--ink);
-    letter-spacing: -0.015em;
-    line-height: 1.2;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-  .recco-flag.interesting {
-    font-family: var(--mono);
-    font-size: 9px;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    padding: 2px 6px;
-    margin-left: 8px;
-    background: var(--orange-bg);
-    color: var(--orange);
-    border: 1px solid var(--orange-rule);
-    vertical-align: middle;
-    white-space: nowrap;
-  }
-  .recco-item.flagged-interesting {
-    background: linear-gradient(to right, var(--orange-bg) 0%, transparent 40%);
-  }
-  .recco-item.flagged-interesting:hover {
-    background: linear-gradient(to right, var(--orange-bg) 0%, var(--paper-tint) 60%);
-  }
-  .recco-reason {
-    font-family: var(--sans);
-    font-size: 11.5px;
-    color: var(--ink-soft);
-    line-height: 1.35;
-    margin-top: 3px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-  }
-  .recco-signals {
-    display: flex;
-    gap: 4px;
-    margin-top: 5px;
-  }
-  .signal-tag {
-    font-family: var(--mono);
-    font-size: 8.5px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 2px 6px;
-    background: var(--paper-tint);
-    color: var(--ink-soft);
-    border: 1px solid var(--rule);
-    font-weight: 500;
-  }
-  .signal-tag.strong { background: var(--green-bg); color: var(--green); border-color: var(--green-rule); }
-
-  .recco-score {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 4px;
-    flex-shrink: 0;
-  }
-  .score-val {
-    font-family: var(--mono);
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--ink);
-    line-height: 1;
-    letter-spacing: -0.02em;
-  }
-  .score-val .score-unit {
-    font-size: 9px;
-    color: var(--ink-faint);
-    font-weight: 400;
-    margin-left: 1px;
-  }
-  .score-bar {
-    width: 80px;
-    height: 4px;
-    background: var(--rule-soft);
-    overflow: hidden;
-  }
-  .score-bar-fill {
-    height: 100%;
-    background: var(--ink);
-    transition: width 0.4s ease-out;
-  }
-  .recco-col.green .score-bar-fill { background: var(--green); }
-  .recco-col.yellow .score-bar-fill { background: var(--yellow); }
-
-  .recco-empty {
-    padding: 14px 0;
-    font-family: var(--sans);
-    font-size: 12.5px;
-    color: var(--ink-faint);
-    font-style: italic;
-  }
-
-  .recco-toggle {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-    cursor: pointer;
-    background: none;
-    border: none;
-    padding: 4px 8px;
-    transition: color 0.15s;
-  }
-  .recco-toggle:hover { color: var(--ink); }
-
-  .recco-panel.collapsed .recco-grid { display: none; }
-  .recco-panel.collapsed .recco-header { border-bottom: none; }
-
-  /* highlight a card briefly when scrolled to from a recco click */
-  @keyframes flash-highlight {
-    0% { box-shadow: 0 0 0 0 var(--ink); }
-    30% { box-shadow: 0 0 0 3px var(--ink); }
-    100% { box-shadow: 0 0 0 0 transparent; }
-  }
-  .card.flash { animation: flash-highlight 1.2s ease-out; }
-
-  @media (max-width: 720px) {
-    .recco-grid { grid-template-columns: 1fr; }
-    .recco-col + .recco-col { border-left: none; border-top: 1px solid var(--rule); }
-  }
-
 </style>
 </head>
 <body>
@@ -1050,33 +806,6 @@
     <button class="tab tab-interesting" data-tab="interesting" role="tab">Interesting <span class="tab-count" id="tc-interesting">0</span></button>
     <button class="tab tab-skip" data-tab="skip" role="tab">We Don't <span class="tab-count" id="tc-skip">0</span></button>
   </div>
-
-  <!-- RECOMMENDATION PANEL -->
-  <section class="recco-panel" id="recco-panel">
-    <div class="recco-header">
-      <span class="recco-title">Where to Start</span>
-      <span class="recco-sub" id="recco-sub">Top opportunities, scored & ranked</span>
-      <button class="recco-toggle" id="recco-toggle">Hide ▾</button>
-    </div>
-    <div class="recco-grid">
-      <div class="recco-col green">
-        <div class="recco-col-head">
-          <span class="recco-col-label">Start Here</span>
-          <span class="recco-col-title">Greens, ranked</span>
-          <span class="recco-col-hint">click to jump ↓</span>
-        </div>
-        <ul class="recco-list" id="recco-green"></ul>
-      </div>
-      <div class="recco-col yellow">
-        <div class="recco-col-head">
-          <span class="recco-col-label">Look Deeper</span>
-          <span class="recco-col-title">Yellows to investigate</span>
-          <span class="recco-col-hint">click to jump ↓</span>
-        </div>
-        <ul class="recco-list" id="recco-yellow"></ul>
-      </div>
-    </div>
-  </section>
 
   <!-- CONTROLS -->
   <div class="controls">
@@ -1396,64 +1125,7 @@ const GITHUB_CONFIG = {
 // Decisions baked into this file. Auto-updated by the dashboard via the GitHub API.
 // DO NOT manually edit this block — the dashboard rewrites it on every save.
 // ── DECISIONS START ──
-const BAKED_DECISIONS = {
-  "Himyo – Your Way, Your Pace": {
-    "status": "skip",
-    "at": "2026-05-16T12:30:40.372Z"
-  },
-  "Runout Poker Trainer GTO Coach": {
-    "status": "interesting",
-    "at": "2026-05-16T12:30:42.272Z"
-  },
-  "Belika: Corridos & Regional IA": {
-    "status": "interesting",
-    "at": "2026-05-16T12:30:54.671Z"
-  },
-  "Localize - Farmers Market": {
-    "status": "interesting",
-    "at": "2026-05-16T12:30:58.171Z"
-  },
-  "ToneAdapt - Guitar Tone Match": {
-    "status": "interesting",
-    "at": "2026-05-16T12:31:08.104Z"
-  },
-  "Pep AI - Peptide Tracker": {
-    "status": "interesting",
-    "at": "2026-05-16T12:31:11.287Z"
-  },
-  "Urbex: Abandoned World": {
-    "status": "interesting",
-    "at": "2026-05-16T12:31:13.537Z"
-  },
-  "Safe Choice - Product Scanner": {
-    "status": "interesting",
-    "at": "2026-05-16T12:31:14.838Z"
-  },
-  "ATC - Live Air Traffic Radio": {
-    "status": "interesting",
-    "at": "2026-05-16T12:31:19.287Z"
-  },
-  "Stella - Manifest Anything": {
-    "status": "skip",
-    "at": "2026-05-16T12:31:25.087Z"
-  },
-  "Marine Traffic Vessel Finder": {
-    "status": "interesting",
-    "at": "2026-05-16T12:31:33.938Z"
-  },
-  "Jam AI - AI Songs & Music": {
-    "status": "interesting",
-    "at": "2026-05-16T12:31:36.504Z"
-  },
-  "Dot: Digital Business Card": {
-    "status": "skip",
-    "at": "2026-05-16T12:31:49.304Z"
-  },
-  "TripRank - Speed Tracker": {
-    "status": "interesting",
-    "at": "2026-05-16T12:31:59.304Z"
-  }
-};
+const BAKED_DECISIONS = {};
 // ── DECISIONS END ──
 
 // ── BUILD ─────────────────────────────────────────────────────
@@ -1684,7 +1356,6 @@ function applyFreshDecisions(content) {
       const fresh = JSON.parse(m[1]);
       state.decisions = fresh;
       updateTabCounts();
-      renderReccoPanel();
       render();
     } catch (e) {
       console.warn('[AI Hunter] Could not parse fresh decisions:', e);
@@ -1856,138 +1527,6 @@ function updateTabCounts() {
   document.getElementById('tc-skip').textContent = counts.skip;
 }
 
-// ── SCORING ─────────────────────────────────────
-// Score 0-100 based on signals an opportunity-hunter cares about.
-function scoreApp(app) {
-  let score = 0;
-  const signals = [];
-
-  // 1. NICHE OPENNESS (up to 35 points)
-  // The single strongest signal — does at least one keyword have a genuinely empty niche?
-  const emptyCount = app.keywords.filter(k => k.density === 'empty').length;
-  const lightCount = app.keywords.filter(k => k.density === 'light').length;
-  if (emptyCount >= 2) { score += 35; signals.push({ label: 'Empty niche', strong: true }); }
-  else if (emptyCount === 1) { score += 28; signals.push({ label: 'Empty niche', strong: true }); }
-  else if (lightCount >= 2) { score += 18; signals.push({ label: 'Low competition', strong: false }); }
-  else if (lightCount === 1) { score += 10; signals.push({ label: 'Some room', strong: false }); }
-
-  // 2. RPD QUALITY (up to 25 points)
-  // Revenue per download = audience willingness to pay
-  if (app.rpd >= 5) { score += 25; signals.push({ label: 'High RPD', strong: true }); }
-  else if (app.rpd >= 2) { score += 18; signals.push({ label: 'Strong RPD', strong: true }); }
-  else if (app.rpd >= 0.5) { score += 10; signals.push({ label: 'Decent RPD', strong: false }); }
-  else if (app.rpd >= 0.1) { score += 4; }
-
-  // 3. RECENCY (up to 15 points)
-  // Recent releases are still clonable; old ones with brand moat are not
-  const releaseDate = new Date(app.released);
-  const monthsAgo = (Date.now() - releaseDate.getTime()) / (1000 * 60 * 60 * 24 * 30);
-  if (monthsAgo <= 3) { score += 15; signals.push({ label: 'Fresh launch', strong: true }); }
-  else if (monthsAgo <= 6) { score += 10; signals.push({ label: 'Recent', strong: false }); }
-  else if (monthsAgo <= 12) { score += 4; }
-
-  // 4. ORGANIC MONETIZATION (up to 15 points)
-  // Inactive or N/A ads = audience came organically. "Active" paid UA = bought traffic.
-  const monetText = (app.monetization || app.findings.join(' ')).toLowerCase();
-  if (app.ads === 'Inactive' || app.ads === 'N/A') {
-    if (monetText.includes('organic') || monetText.includes('viral') || monetText.includes('aso')) {
-      score += 15; signals.push({ label: 'Organic traction', strong: true });
-    } else {
-      score += 8;
-    }
-  } else if (app.ads === 'New') {
-    score += 6; // just starting paid - not yet relying on it
-  }
-
-  // 5. REVENUE PROOF (up to 10 points)
-  // Some revenue proves the market exists — but bigger isn't necessarily better
-  if (app.revenue >= 50000 && app.revenue <= 500000) { score += 10; }
-  else if (app.revenue >= 10000) { score += 6; }
-  else if (app.revenue >= 1000) { score += 2; }
-
-  return { score: Math.min(100, score), signals: signals.slice(0, 2) };
-}
-
-function renderReccoPanel() {
-  // Include apps in 'new' AND 'interesting' states — Interesting is a watchlist
-  // flag, not a final decision, so those apps should keep showing up here.
-  // Only 'do' and 'skip' (final decisions) remove an app from recommendations.
-  const candidates = APPS.filter(a => {
-    const s = getStatus(a.name);
-    return s === 'new' || s === 'interesting';
-  });
-
-  const scored = candidates.map(a => ({ app: a, ...scoreApp(a) }))
-                            .sort((x, y) => y.score - x.score);
-
-  const greens = scored.filter(x => x.app.verdict === 'GREEN').slice(0, 5);
-  const yellows = scored.filter(x => x.app.verdict === 'YELLOW').slice(0, 5);
-
-  document.getElementById('recco-sub').textContent =
-    `${greens.length} green · ${yellows.length} yellow · scored & ranked`;
-
-  const buildItem = (entry) => {
-    const a = entry.app;
-    const isInteresting = getStatus(a.name) === 'interesting';
-    const signalsHTML = entry.signals.map(s =>
-      `<span class="signal-tag ${s.strong ? 'strong' : ''}">${s.label}</span>`
-    ).join('');
-    const interestingBadge = isInteresting
-      ? '<span class="recco-flag interesting" title="You flagged this as Interesting">★ Interesting</span>'
-      : '';
-    return `
-      <li class="recco-item ${isInteresting ? 'flagged-interesting' : ''}" data-jump="${a.name.replace(/"/g, '&quot;')}">
-        <span class="recco-rank"></span>
-        <div class="recco-body">
-          <div class="recco-name">${a.name}${interestingBadge}</div>
-          <div class="recco-reason">${a.description || a.why.split(/[.!?]\s+/)[0] + '.'}</div>
-          <div class="recco-signals">${signalsHTML}</div>
-        </div>
-        <div class="recco-score">
-          <span class="score-val">${entry.score}<span class="score-unit">/100</span></span>
-          <div class="score-bar"><div class="score-bar-fill" style="width: ${entry.score}%"></div></div>
-        </div>
-      </li>
-    `;
-  };
-
-  const greenList = document.getElementById('recco-green');
-  const yellowList = document.getElementById('recco-yellow');
-
-  greenList.innerHTML = greens.length
-    ? greens.map(buildItem).join('')
-    : '<li class="recco-empty">No green opportunities left to review.</li>';
-  yellowList.innerHTML = yellows.length
-    ? yellows.map(buildItem).join('')
-    : '<li class="recco-empty">No yellow opportunities left to review.</li>';
-
-  // Wire jump-to-card clicks
-  document.querySelectorAll('.recco-item[data-jump]').forEach(item => {
-    item.addEventListener('click', () => {
-      const targetName = item.dataset.jump;
-      // Jump to whichever tab the app actually lives in (new or interesting)
-      const targetTab = getStatus(targetName);
-      if (state.tab !== targetTab) {
-        state.tab = targetTab;
-        document.querySelectorAll('.tab[data-tab]').forEach(t =>
-          t.classList.toggle('active', t.dataset.tab === targetTab));
-        // Recco panel only shows on the "new" tab
-        document.getElementById('recco-panel').style.display = (state.tab === 'new') ? '' : 'none';
-        render();
-      }
-      // Brief delay so DOM is settled, then find & scroll
-      requestAnimationFrame(() => {
-        const card = [...document.querySelectorAll('.card')]
-          .find(c => c.dataset.name === targetName.toLowerCase());
-        if (card) {
-          card.classList.add('expanded', 'flash');
-          card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          setTimeout(() => card.classList.remove('flash'), 1300);
-        }
-      });
-    });
-  });
-}
 
 function render() {
   const results = document.getElementById('results');
@@ -2054,7 +1593,6 @@ function render() {
       const action = btn.dataset.action;
       setDecision(appName, action);
       updateTabCounts();
-      renderReccoPanel();
 
       // find the card, preserve its expanded state, swap its HTML in place
       const card = btn.closest('.card');
@@ -2088,7 +1626,6 @@ function wireDecisionClick(e) {
   const action = btn.dataset.action;
   setDecision(appName, action);
   updateTabCounts();
-  renderReccoPanel();
 
   const card = btn.closest('.card');
   const app = APPS.find(a => a.name === appName);
@@ -2184,18 +1721,8 @@ async function init() {
     tab.addEventListener('click', () => {
       state.tab = tab.dataset.tab;
       document.querySelectorAll('.tab[data-tab]').forEach(t => t.classList.toggle('active', t === tab));
-      // Recco panel only shows on the "new" tab — it's a triage tool
-      document.getElementById('recco-panel').style.display = (state.tab === 'new') ? '' : 'none';
       render();
     });
-  });
-
-  // wire recco panel collapse toggle
-  document.getElementById('recco-toggle').addEventListener('click', () => {
-    const p = document.getElementById('recco-panel');
-    p.classList.toggle('collapsed');
-    document.getElementById('recco-toggle').textContent =
-      p.classList.contains('collapsed') ? 'Show ▾' : 'Hide ▾';
   });
 
   // wire chips
@@ -2217,7 +1744,6 @@ async function init() {
   adsSel.addEventListener('change', e => { state.ads = e.target.value; render(); });
   document.getElementById('search').addEventListener('input', e => { state.search = e.target.value; render(); });
 
-  renderReccoPanel();
   render();
 
   // After initial render, fetch latest decisions from GitHub in case the cached HTML is stale
