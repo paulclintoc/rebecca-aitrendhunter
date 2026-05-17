@@ -1009,8 +1009,8 @@ function parseCsvToApps(csvText) {
       ads: normalizeAds(row['Ads Network']),
       rpd: rpd,
       stLink: row['Sensor Tower Link'] || '',
-      description: row['Description'] || '',
-      why: row['Why Simple'] || '',
+      description: row['App Description'] || row['Description'] || '',
+      why: row['Why it could work / not work'] || row['Why Simple'] || '',
       findings: findings,
       keywords: keywords
     });
