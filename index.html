@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>AI Hunter — Opportunity Dossier</title>
+<title>Dashboard</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
     --paper: #fbfbf9;
@@ -33,7 +33,6 @@
     --orange-bg: #f4e6d4;
     --orange-rule: #d6b489;
 
-    --serif: 'Source Serif 4', 'Charter', Georgia, serif;
     --sans: 'Inter Tight', -apple-system, system-ui, sans-serif;
     --mono: 'JetBrains Mono', ui-monospace, Menlo, monospace;
   }
@@ -49,79 +48,40 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  /* paper grain */
-  body::before {
-    content: '';
-    position: fixed; inset: 0;
-    background-image:
-      radial-gradient(circle at 1px 1px, rgba(0,0,0,0.025) 1px, transparent 0);
-    background-size: 4px 4px;
-    pointer-events: none;
-    z-index: 0;
-  }
-
   .page {
     max-width: 1080px;
     margin: 0 auto;
-    padding: 56px 40px 80px;
-    position: relative;
-    z-index: 1;
+    padding: 40px 32px 80px;
   }
 
-  /* ── MASTHEAD ───────────────────────────────────── */
+  /* ─── MASTHEAD ─────────────────────────────────────── */
   .masthead {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
     border-top: 2px solid var(--ink);
     border-bottom: 1px solid var(--ink);
-    padding: 16px 0 14px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    margin-bottom: 28px;
     flex-wrap: wrap;
     gap: 12px;
   }
-  .wordmark {
-    font-family: var(--sans);
+  .title {
+    font-size: 20px;
     font-weight: 700;
-    font-size: 22px;
     letter-spacing: -0.02em;
-    line-height: 1;
-    color: var(--ink);
     text-transform: uppercase;
   }
-  .wordmark em {
-    font-style: normal;
-    font-weight: 400;
-    color: var(--ink-faint);
-    font-size: 12px;
-    margin-left: 12px;
-    letter-spacing: 0.05em;
-    font-family: var(--mono);
-    text-transform: uppercase;
-  }
-  .masthead-meta {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--ink-faint);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+  .masthead-right {
     display: flex;
     align-items: center;
     gap: 14px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
   }
-  .live-dot {
-    width: 6px; height: 6px;
-    background: var(--green);
-    border-radius: 50%;
-    display: inline-block;
-    box-shadow: 0 0 0 3px rgba(30,90,58,0.15);
-    animation: pulse 2s ease-in-out infinite;
-  }
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.4; }
-  }
-
-  /* ── SYNC INDICATOR ─────────────────────────────────── */
   .sync-indicator {
     font-family: var(--mono);
     font-size: 11px;
@@ -132,8 +92,8 @@
     border: 1px solid transparent;
     cursor: pointer;
     color: var(--ink-faint);
-    transition: all 0.15s;
     font-weight: 500;
+    transition: all 0.15s;
   }
   .sync-indicator:hover { border-color: var(--rule); }
   .sync-indicator.ok { color: var(--green); }
@@ -141,245 +101,169 @@
   .sync-indicator.warn { color: var(--orange); border-color: var(--orange-rule); }
   .sync-indicator.err { color: var(--red); border-color: var(--red-rule); background: var(--red-bg); }
 
-  /* ── MODAL ─────────────────────────────────── */
-  .modal-backdrop {
-    position: fixed;
-    inset: 0;
-    background: rgba(15, 15, 15, 0.55);
+  /* ─── TABS ─────────────────────────────────────── */
+  .tabs {
+    display: flex;
+    border-bottom: 1px solid var(--ink);
+    margin-bottom: 20px;
+  }
+  .tab {
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 12px 22px;
+    background: transparent;
+    border: none;
+    border-top: 2px solid transparent;
+    cursor: pointer;
+    color: var(--ink-faint);
     display: flex;
     align-items: center;
-    justify-content: center;
-    z-index: 1000;
-    backdrop-filter: blur(2px);
+    gap: 10px;
+    transition: all 0.15s;
   }
-  .modal {
+  .tab:hover { color: var(--ink); background: var(--paper-tint); }
+  .tab.active {
+    color: var(--ink);
     background: var(--paper);
-    max-width: 540px;
-    width: calc(100% - 40px);
-    padding: 32px;
-    border: 1px solid var(--ink);
-    border-top: 3px solid var(--ink);
+    border-top-color: var(--ink);
+    border-left: 1px solid var(--rule);
+    border-right: 1px solid var(--rule);
+    margin-bottom: -1px;
+    border-bottom: 1px solid var(--paper);
   }
-  .modal-title {
-    font-family: var(--sans);
-    font-size: 18px;
-    font-weight: 700;
-    letter-spacing: -0.01em;
-    color: var(--ink);
-    margin-bottom: 16px;
-  }
-  .modal-body {
-    font-family: var(--sans);
-    font-size: 13.5px;
-    line-height: 1.5;
-    color: var(--ink-soft);
-    margin-bottom: 14px;
-  }
-  .modal-body code {
-    font-family: var(--mono);
-    font-size: 12px;
-    background: var(--paper-tint);
-    padding: 1px 6px;
-    color: var(--ink);
-  }
-  .modal-hint {
-    font-family: var(--sans);
-    font-size: 12px;
-    color: var(--ink-faint);
-    margin-bottom: 18px;
-    line-height: 1.5;
-  }
-  .modal-hint a { color: var(--ink); border-bottom: 1px solid var(--rule); text-decoration: none; }
-  .modal-hint a:hover { border-bottom-color: var(--ink); }
-  .modal-label {
-    display: block;
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-    margin-bottom: 6px;
-    font-weight: 600;
-  }
-  .modal-input {
-    width: 100%;
-    font-family: var(--mono);
-    font-size: 13px;
-    padding: 10px 12px;
-    border: 1px solid var(--rule);
-    background: var(--paper);
-    color: var(--ink);
-    outline: none;
-    transition: border 0.15s;
-  }
-  .modal-input:focus { border-color: var(--ink); }
-  .modal-actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 8px;
-    margin-top: 22px;
-  }
-  .modal-btn {
+  .tab.tab-do.active { border-top-color: var(--green); }
+  .tab.tab-interesting.active { border-top-color: var(--orange); }
+  .tab.tab-skip.active { border-top-color: var(--red); }
+  .tab-count {
     font-family: var(--mono);
     font-size: 11px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 9px 18px;
-    border: 1px solid var(--rule);
-    cursor: pointer;
-    transition: all 0.15s;
-    font-weight: 600;
-    background: var(--paper);
+    padding: 2px 8px;
+    background: var(--paper-tint);
     color: var(--ink-soft);
+    border-radius: 100px;
+    letter-spacing: 0;
   }
-  .modal-btn:hover { border-color: var(--ink); color: var(--ink); }
-  .modal-btn.primary { background: var(--ink); color: var(--paper); border-color: var(--ink); }
-  .modal-btn.primary:hover { background: var(--ink-soft); }
-  .modal-btn.secondary {}
+  .tab.active .tab-count { background: var(--ink); color: var(--paper); }
 
-  .subhead {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    padding: 8px 0 28px;
-    border-bottom: 1px solid var(--rule);
-    margin-bottom: 28px;
-  }
-  .subhead .dateline {
-    font-family: var(--mono);
-    font-size: 10.5px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-  }
-  .subhead .vol {
-    font-family: var(--sans);
-    font-size: 12.5px;
-    color: var(--ink-soft);
-    font-weight: 400;
-  }
-
-  /* ── CONTROL BAR ───────────────────────────────────── */
-  .controls {
+  /* ─── FILTERS ─────────────────────────────────────── */
+  .filters {
     display: flex;
     flex-wrap: wrap;
     gap: 8px 14px;
     align-items: center;
-    margin-bottom: 36px;
-    padding: 14px 18px;
+    padding: 12px 16px;
     background: var(--paper-tint);
     border: 1px solid var(--rule);
-    border-radius: 2px;
+    margin-bottom: 28px;
   }
-  .ctrl-label {
+  .filter-label {
     font-family: var(--mono);
     font-size: 10px;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--ink-faint);
-    margin-right: 4px;
+    margin-right: 2px;
   }
   .chip {
     font-family: var(--mono);
     font-size: 11px;
     letter-spacing: 0.06em;
-    padding: 6px 12px;
+    padding: 5px 11px;
     border: 1px solid var(--rule);
     background: var(--paper);
     cursor: pointer;
     border-radius: 100px;
+    color: var(--ink-soft);
     transition: all 0.15s;
     user-select: none;
-    color: var(--ink-soft);
   }
   .chip:hover { border-color: var(--ink); color: var(--ink); }
   .chip.active.green { background: var(--green); border-color: var(--green); color: #fff; }
   .chip.active.yellow { background: var(--yellow); border-color: var(--yellow); color: #fff; }
   .chip.active.red { background: var(--red); border-color: var(--red); color: #fff; }
-  .chip .count {
-    opacity: 0.6;
-    margin-left: 4px;
-    font-weight: 500;
-  }
   select, input[type=search] {
     font-family: var(--sans);
     font-size: 13px;
     padding: 6px 10px;
     border: 1px solid var(--rule);
     background: var(--paper);
-    border-radius: 2px;
     color: var(--ink);
     outline: none;
   }
   select:focus, input[type=search]:focus { border-color: var(--ink); }
   input[type=search] { min-width: 200px; }
-  .ctrl-divider { width: 1px; height: 22px; background: var(--rule); margin: 0 4px; }
+  .filter-divider { width: 1px; height: 20px; background: var(--rule); margin: 0 4px; }
 
-  /* ── SECTION HEADERS ───────────────────────────────────── */
+  /* ─── SECTION HEADERS ─────────────────────────────────────── */
   .section-head {
     display: flex;
     align-items: center;
-    gap: 16px;
-    margin: 36px 0 16px;
+    gap: 14px;
+    margin: 28px 0 14px;
   }
   .section-head:first-child { margin-top: 0; }
-  .section-head .label {
+  .section-label {
     font-family: var(--sans);
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 700;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    padding: 5px 12px;
+    padding: 5px 11px;
     color: #fff;
   }
-  .section-head.green .label { background: var(--green); }
-  .section-head.yellow .label { background: var(--yellow); }
-  .section-head.red .label { background: var(--red); }
-  .section-head .blurb {
+  .section-head.green .section-label { background: var(--green); }
+  .section-head.yellow .section-label { background: var(--yellow); }
+  .section-head.red .section-label { background: var(--red); }
+  .section-count {
     font-family: var(--mono);
     font-size: 10.5px;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--ink-faint);
   }
-  .section-head .rule {
+  .section-rule {
     flex: 1;
     height: 1px;
     background: var(--rule);
   }
 
-  /* ── CARD ───────────────────────────────────── */
+  /* ─── CARD ─────────────────────────────────────── */
   .card {
     background: var(--paper);
     border: 1px solid var(--rule);
     border-left-width: 3px;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     overflow: hidden;
-    transition: border-color 0.2s, box-shadow 0.2s;
   }
   .card.green { border-left-color: var(--green); }
   .card.yellow { border-left-color: var(--yellow); }
   .card.red { border-left-color: var(--red); }
   .card.expanded { box-shadow: 0 2px 0 var(--rule-soft); }
+  .card.decided.do { background: linear-gradient(to right, var(--green-bg) 0%, var(--paper) 8%); }
+  .card.decided.interesting { background: linear-gradient(to right, var(--orange-bg) 0%, var(--paper) 8%); }
+  .card.decided.skip { background: linear-gradient(to right, var(--red-bg) 0%, var(--paper) 8%); }
 
   .card-head {
-    padding: 18px 24px 16px;
+    padding: 16px 22px 14px;
     cursor: pointer;
     user-select: none;
     transition: background 0.15s;
   }
   .card-head:hover { background: var(--paper-tint); }
 
-  .card-head-top {
+  .card-top {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     gap: 16px;
-    margin-bottom: 14px;
+    margin-bottom: 12px;
   }
-  .card-head-title {
+  .card-title {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 12px;
     flex: 1;
     min-width: 0;
@@ -390,42 +274,35 @@
     letter-spacing: 0.18em;
     text-transform: uppercase;
     padding: 4px 8px;
-    display: inline-block;
     font-weight: 500;
     flex-shrink: 0;
+    margin-top: 1px;
   }
   .card.green .verdict-pill { background: var(--green); color: #fff; }
   .card.yellow .verdict-pill { background: var(--yellow); color: #fff; }
   .card.red .verdict-pill { background: var(--red); color: #fff; }
-
-  .app-name {
-    font-family: var(--sans);
-    font-size: 19px;
-    font-weight: 600;
-    letter-spacing: -0.015em;
-    line-height: 1.2;
-    color: var(--ink);
-    min-width: 0;
-  }
-  .app-title-block {
+  .name-block {
     flex: 1;
     min-width: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
+  }
+  .app-name {
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    line-height: 1.25;
+    color: var(--ink);
   }
   .app-description {
-    font-family: var(--sans);
     font-size: 13.5px;
-    font-weight: 400;
-    line-height: 1.4;
     color: var(--ink-soft);
-    letter-spacing: -0.005em;
+    line-height: 1.4;
+    margin-top: 4px;
   }
-  .card-head-actions {
+
+  .card-actions {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     flex-shrink: 0;
   }
   .st-button {
@@ -442,275 +319,21 @@
     white-space: nowrap;
     font-weight: 500;
   }
-  .st-button:hover {
-    background: var(--ink);
-    color: var(--paper);
-  }
+  .st-button:hover { background: var(--ink); color: var(--paper); }
   .expand-toggle {
     font-family: var(--mono);
     font-size: 14px;
     color: var(--ink-faint);
-    transition: transform 0.2s;
     width: 16px;
     text-align: center;
-    user-select: none;
+    transition: transform 0.2s;
   }
   .card.expanded .expand-toggle { transform: rotate(180deg); color: var(--ink); }
 
-  .meta-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0;
-    align-items: stretch;
-    border-top: 1px solid var(--rule-soft);
-    padding-top: 12px;
-  }
-  .meta-cell {
-    flex: 1;
-    min-width: 110px;
-    padding-right: 16px;
-    border-right: 1px solid var(--rule-soft);
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-  }
-  .meta-cell:last-child { border-right: none; padding-right: 0; }
-  .meta-cell + .meta-cell { padding-left: 16px; }
-  .meta-lbl {
-    font-family: var(--mono);
-    font-size: 9.5px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-    font-weight: 500;
-  }
-  .meta-val {
-    font-family: var(--sans);
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--ink);
-    letter-spacing: -0.01em;
-    line-height: 1.2;
-  }
-  .meta-val.mono {
-    font-family: var(--mono);
-    font-size: 13px;
-    font-weight: 500;
-  }
-
-  .card-body {
-    padding: 4px 24px 24px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 28px 36px;
-    border-top: 1px solid var(--rule-soft);
-    padding-top: 22px;
-    margin-top: 0;
-  }
-  .card:not(.expanded) .card-body { display: none; }
-
-  .block-title {
-    font-family: var(--mono);
-    font-size: 9.5px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-    margin-bottom: 10px;
-    padding-bottom: 6px;
-    border-bottom: 1px solid var(--rule);
-    font-weight: 500;
-  }
-  .why-text {
-    font-family: var(--serif);
-    font-size: 15.5px;
-    line-height: 1.55;
-    color: var(--ink);
-    font-weight: 400;
-    letter-spacing: -0.003em;
-  }
-
-  .findings {
-    list-style: none;
-    font-size: 13px;
-    line-height: 1.5;
-    color: var(--ink-soft);
-    font-family: var(--sans);
-  }
-  .findings li {
-    padding: 7px 0 7px 16px;
-    position: relative;
-    border-bottom: 1px solid var(--rule-soft);
-  }
-  .findings li:last-child { border-bottom: none; }
-  .findings li::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 14px;
-    width: 6px;
-    height: 1px;
-    background: var(--ink-faint);
-  }
-
-  .keywords {
-    grid-column: 1 / -1;
-  }
-  .kw-table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  .kw-row {
-    border-bottom: 1px solid var(--rule-soft);
-  }
-  .kw-row:last-child { border-bottom: none; }
-  .kw-row td {
-    padding: 12px 12px;
-    vertical-align: middle;
-  }
-  .kw-term {
-    font-family: var(--mono);
-    font-size: 12.5px;
-    color: var(--ink);
-    width: 26%;
-    font-weight: 500;
-  }
-  .kw-term::before { content: '"'; color: var(--ink-faint); }
-  .kw-term::after { content: '"'; color: var(--ink-faint); }
-  .kw-density {
-    width: 22%;
-    font-family: var(--mono);
-    font-size: 10.5px;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-  }
-  .kw-density .count {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--ink);
-    display: block;
-    margin-bottom: 2px;
-    text-transform: none;
-    letter-spacing: -0.01em;
-    font-family: var(--sans);
-  }
-  .kw-density.empty .count { color: var(--green); }
-  .kw-density.empty::after { content: '✦ empty niche'; color: var(--green); font-weight: 600; }
-  .kw-density.light::after { content: 'moderate'; color: var(--ink-faint); }
-  .kw-density.medium::after { content: 'competitive'; color: var(--yellow); }
-  .kw-density.heavy::after { content: 'crowded'; color: var(--red); }
-  .kw-density.saturated::after { content: 'saturated'; color: var(--red); font-weight: 600; }
-  .kw-finding {
-    font-size: 12.5px;
-    line-height: 1.45;
-    color: var(--ink-soft);
-    font-family: var(--sans);
-    font-style: normal;
-  }
-  .kw-link {
-    width: 130px;
-    text-align: right;
-  }
-  .kw-link a, .st-link {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
-    text-decoration: none;
-    border-bottom: 1px solid var(--rule);
-    padding-bottom: 1px;
-    transition: all 0.15s;
-    white-space: nowrap;
-    font-weight: 500;
-  }
-  .kw-link a:hover, .st-link:hover {
-    color: var(--ink);
-    border-bottom-color: var(--ink);
-  }
-
-  .card-footer { display: none; }
-
-  .empty-state {
-    padding: 48px 24px;
-    text-align: center;
-    color: var(--ink-faint);
-    font-family: var(--sans);
-    font-size: 14px;
-    border: 1px dashed var(--rule);
-  }
-
-  @media (max-width: 720px) {
-    .page { padding: 32px 20px 60px; }
-    .wordmark { font-size: 18px; }
-    .card-head-top { flex-wrap: wrap; }
-    .meta-row { flex-direction: column; gap: 8px; }
-    .meta-cell { border-right: none; border-bottom: 1px solid var(--rule-soft); padding: 0 0 8px 0 !important; }
-    .meta-cell:last-child { border-bottom: none; }
-    .card-body { grid-template-columns: 1fr; gap: 24px; }
-    .kw-row td { padding: 8px 6px; font-size: 11px; }
-    .kw-density { width: auto; }
-    .kw-link { width: auto; }
-  }
-
-  /* ── TABS ───────────────────────────────────── */
-  .tabs {
-    display: flex;
-    gap: 0;
-    margin-bottom: 24px;
-    border-bottom: 1px solid var(--ink);
-  }
-  .tab {
-    font-family: var(--sans);
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 14px 24px;
-    background: transparent;
-    border: none;
-    border-top: 2px solid transparent;
-    cursor: pointer;
-    color: var(--ink-faint);
-    transition: all 0.15s;
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .tab:hover { color: var(--ink); background: var(--paper-tint); }
-  .tab.active {
-    color: var(--ink);
-    background: var(--paper);
-    border-top-color: var(--ink);
-    border-left: 1px solid var(--rule);
-    border-right: 1px solid var(--rule);
-    margin-bottom: -1px;
-    border-bottom: 1px solid var(--paper);
-    z-index: 1;
-  }
-  .tab .tab-count {
-    font-family: var(--mono);
-    font-size: 11px;
-    font-weight: 500;
-    padding: 2px 8px;
-    background: var(--paper-tint);
-    color: var(--ink-soft);
-    border-radius: 100px;
-    letter-spacing: 0;
-  }
-  .tab.active .tab-count {
-    background: var(--ink);
-    color: var(--paper);
-  }
-  .tab.tab-do.active { border-top-color: var(--green); }
-  .tab.tab-interesting.active { border-top-color: var(--orange); }
-  .tab.tab-skip.active { border-top-color: var(--red); }
-
-  /* ── DECISION BUTTONS ───────────────────────────────────── */
+  /* ─── DECISION BUTTONS ─────────────────────────────────────── */
   .decision-bar {
     display: flex;
     gap: 6px;
-    align-items: center;
   }
   .decision-btn {
     font-family: var(--mono);
@@ -729,121 +352,310 @@
     align-items: center;
     gap: 5px;
   }
-  .decision-btn:hover {
-    border-color: var(--ink);
-    color: var(--ink);
-  }
+  .decision-btn:hover { border-color: var(--ink); color: var(--ink); }
   .decision-btn.do { color: var(--green); border-color: var(--green-rule); }
   .decision-btn.do:hover { background: var(--green); color: #fff; border-color: var(--green); }
   .decision-btn.do.active { background: var(--green); color: #fff; border-color: var(--green); }
-  .decision-btn.do.active:hover { background: var(--paper); color: var(--green); border-color: var(--green-rule); }
   .decision-btn.interesting { color: var(--orange); border-color: var(--orange-rule); }
   .decision-btn.interesting:hover { background: var(--orange); color: #fff; border-color: var(--orange); }
   .decision-btn.interesting.active { background: var(--orange); color: #fff; border-color: var(--orange); }
-  .decision-btn.interesting.active:hover { background: var(--paper); color: var(--orange); border-color: var(--orange-rule); }
   .decision-btn.skip { color: var(--red); border-color: var(--red-rule); }
   .decision-btn.skip:hover { background: var(--red); color: #fff; border-color: var(--red); }
   .decision-btn.skip.active { background: var(--red); color: #fff; border-color: var(--red); }
-  .decision-btn.skip.active:hover { background: var(--paper); color: var(--red); border-color: var(--red-rule); }
-  .decision-btn.reset { color: var(--ink-faint); }
-  .decision-btn .icon { font-size: 12px; line-height: 1; }
 
-  /* status indicator on the card itself */
+  /* ─── META ROW ─────────────────────────────────────── */
+  .meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    border-top: 1px solid var(--rule-soft);
+    padding-top: 12px;
+  }
+  .meta-cell {
+    flex: 1;
+    min-width: 100px;
+    padding-right: 14px;
+    border-right: 1px solid var(--rule-soft);
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .meta-cell:last-child { border-right: none; padding-right: 0; }
+  .meta-cell + .meta-cell { padding-left: 14px; }
+  .meta-lbl {
+    font-family: var(--mono);
+    font-size: 9.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    font-weight: 500;
+  }
+  .meta-val {
+    font-size: 13.5px;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+  .meta-val.mono {
+    font-family: var(--mono);
+    font-size: 12.5px;
+  }
+
   .status-stamp {
     font-family: var(--mono);
     font-size: 9.5px;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--ink-faint);
-    padding: 4px 0;
+    padding: 6px 0 0 0;
+    margin-top: 10px;
     border-top: 1px solid var(--rule-soft);
-    margin-top: 12px;
     display: flex;
     justify-content: space-between;
-    align-items: center;
   }
-  .status-stamp .status-label {
+  .status-stamp.do .status-label { color: var(--green); font-weight: 600; }
+  .status-stamp.interesting .status-label { color: var(--orange); font-weight: 600; }
+  .status-stamp.skip .status-label { color: var(--red); font-weight: 600; }
+
+  /* ─── EXPANDED CARD BODY ─────────────────────────────────────── */
+  .card-body {
+    padding: 0 22px 20px;
+    border-top: 1px solid var(--rule-soft);
+    padding-top: 20px;
+  }
+  .card:not(.expanded) .card-body { display: none; }
+
+  .body-section {
+    margin-bottom: 22px;
+  }
+  .body-section:last-child { margin-bottom: 0; }
+  .body-title {
+    font-family: var(--mono);
+    font-size: 9.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--rule);
+    font-weight: 500;
+  }
+  .body-text {
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--ink);
+    white-space: pre-wrap;
+  }
+
+  .kw-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .kw-row {
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  .kw-row:last-child { border-bottom: none; }
+  .kw-row td {
+    padding: 12px 12px;
+    vertical-align: top;
+  }
+  .kw-row td:first-child { padding-left: 0; }
+  .kw-row td:last-child { padding-right: 0; }
+  .kw-term {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--ink);
+    width: 28%;
+    font-weight: 500;
+  }
+  .kw-term::before { content: '"'; color: var(--ink-faint); }
+  .kw-term::after { content: '"'; color: var(--ink-faint); }
+  .kw-result {
+    font-size: 13px;
+    line-height: 1.45;
+    color: var(--ink-soft);
+    white-space: pre-wrap;
+  }
+  .kw-link {
+    width: 130px;
+    text-align: right;
+    white-space: nowrap;
+  }
+  .kw-link a {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    text-decoration: none;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 1px;
+    transition: all 0.15s;
+  }
+  .kw-link a:hover { color: var(--ink); border-bottom-color: var(--ink); }
+
+  /* ─── EMPTY / LOADING ─────────────────────────────────────── */
+  .empty-state {
+    padding: 48px 24px;
+    text-align: center;
+    color: var(--ink-faint);
+    font-size: 14px;
+    border: 1px dashed var(--rule);
+  }
+  .empty-state.error {
+    color: var(--red);
+    border-color: var(--red-rule);
+    background: var(--red-bg);
+  }
+
+  /* ─── MODAL ─────────────────────────────────────── */
+  .modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 15, 15, 0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+  .modal {
+    background: var(--paper);
+    max-width: 540px;
+    width: calc(100% - 40px);
+    padding: 30px;
+    border: 1px solid var(--ink);
+    border-top: 3px solid var(--ink);
+  }
+  .modal-title {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 14px;
+  }
+  .modal-body {
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    margin-bottom: 14px;
+  }
+  .modal-body code {
+    font-family: var(--mono);
+    font-size: 12px;
+    background: var(--paper-tint);
+    padding: 1px 6px;
+  }
+  .modal-hint {
+    font-size: 12px;
+    color: var(--ink-faint);
+    margin-bottom: 16px;
+  }
+  .modal-hint a { color: var(--ink); border-bottom: 1px solid var(--rule); text-decoration: none; }
+  .modal-label {
+    display: block;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 6px;
     font-weight: 600;
   }
-  .status-stamp.do .status-label { color: var(--green); }
-  .status-stamp.interesting .status-label { color: var(--orange); }
-  .status-stamp.skip .status-label { color: var(--red); }
-  .status-stamp .status-date {
-    font-weight: 400;
-    color: var(--ink-faint);
+  .modal-input {
+    width: 100%;
+    font-family: var(--mono);
+    font-size: 13px;
+    padding: 9px 12px;
+    border: 1px solid var(--rule);
+    background: var(--paper);
+    outline: none;
   }
+  .modal-input:focus { border-color: var(--ink); }
+  .modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 20px;
+  }
+  .modal-btn {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 9px 18px;
+    border: 1px solid var(--rule);
+    background: var(--paper);
+    color: var(--ink-soft);
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.15s;
+  }
+  .modal-btn:hover { border-color: var(--ink); color: var(--ink); }
+  .modal-btn.primary { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .modal-btn.primary:hover { background: var(--ink-soft); }
 
-  /* dim cards that have been marked (in any tab they appear) */
-  .card.decided { opacity: 0.92; }
-  .card.decided.do { background: linear-gradient(to right, var(--green-bg) 0%, var(--paper) 8%); }
-  .card.decided.interesting { background: linear-gradient(to right, var(--orange-bg) 0%, var(--paper) 8%); }
-  .card.decided.skip { background: linear-gradient(to right, var(--red-bg) 0%, var(--paper) 8%); }
-
+  @media (max-width: 720px) {
+    .page { padding: 24px 16px 60px; }
+    .card-top { flex-direction: column; }
+    .meta-row { flex-direction: column; gap: 8px; }
+    .meta-cell { border-right: none; border-bottom: 1px solid var(--rule-soft); padding: 0 0 8px 0 !important; }
+    .meta-cell:last-child { border-bottom: none; }
+    .kw-row td { padding: 8px 4px; font-size: 11px; }
+    .kw-term, .kw-link { width: auto; }
+  }
 </style>
 </head>
 <body>
 
 <div class="page">
 
-  <!-- MASTHEAD -->
   <header class="masthead">
-    <h1 class="wordmark">AI Hunter <em>Internal Research Database</em></h1>
-    <div class="masthead-meta">
+    <div class="title">Dashboard</div>
+    <div class="masthead-right">
       <button id="sync-indicator" class="sync-indicator ok" title="Click to manage GitHub token">● Synced</button>
-      <span id="app-count">52 apps</span>
+      <span id="app-count">0 apps</span>
     </div>
   </header>
 
-  <div class="subhead">
-    <span class="dateline">Confidential · For internal use</span>
-    <span class="vol">Mobile app opportunity tracking · Sensor Tower data</span>
-  </div>
-
-  <!-- TABS -->
   <div class="tabs" role="tablist">
-    <button class="tab tab-new active" data-tab="new" role="tab">New Opportunities <span class="tab-count" id="tc-new">0</span></button>
+    <button class="tab tab-new active" data-tab="new" role="tab">New <span class="tab-count" id="tc-new">0</span></button>
     <button class="tab tab-do" data-tab="do" role="tab">We Do <span class="tab-count" id="tc-do">0</span></button>
     <button class="tab tab-interesting" data-tab="interesting" role="tab">Interesting <span class="tab-count" id="tc-interesting">0</span></button>
     <button class="tab tab-skip" data-tab="skip" role="tab">We Don't <span class="tab-count" id="tc-skip">0</span></button>
   </div>
 
-  <!-- CONTROLS -->
-  <div class="controls">
-    <span class="ctrl-label">Verdict</span>
-    <button class="chip active green" data-verdict="GREEN">● Green <span class="count" id="cnt-green">0</span></button>
-    <button class="chip active yellow" data-verdict="YELLOW">○ Yellow <span class="count" id="cnt-yellow">0</span></button>
-    <button class="chip active red" data-verdict="RED">○ Red <span class="count" id="cnt-red">0</span></button>
-    <span class="ctrl-divider"></span>
-    <span class="ctrl-label">Category</span>
+  <div class="filters">
+    <span class="filter-label">Verdict</span>
+    <button class="chip active green" data-verdict="GREEN">● Green</button>
+    <button class="chip active yellow" data-verdict="YELLOW">○ Yellow</button>
+    <button class="chip active red" data-verdict="RED">○ Red</button>
+    <span class="filter-divider"></span>
+    <span class="filter-label">Category</span>
     <select id="cat-filter"><option value="">all</option></select>
-    <span class="ctrl-divider"></span>
-    <span class="ctrl-label">Ads</span>
-    <select id="ads-filter"><option value="">any</option></select>
-    <span class="ctrl-divider"></span>
+    <span class="filter-divider"></span>
+    <span class="filter-label">Country</span>
+    <select id="country-filter"><option value="">all</option></select>
+    <span class="filter-divider"></span>
     <input type="search" id="search" placeholder="search app or category…" />
   </div>
 
-  <div id="results"></div>
+  <div id="results"><div class="empty-state">Loading apps…</div></div>
 
   <!-- TOKEN DIALOG -->
   <div id="token-dialog" class="modal-backdrop" style="display:none;">
     <div class="modal">
       <h2 class="modal-title">GitHub Sync Setup</h2>
       <p class="modal-body">
-        To enable team-wide saving, paste a fine-grained GitHub personal access token below.
-        The token needs <strong>Contents: Read &amp; Write</strong> permission on the
-        <code id="modal-repo-name">repository</code>. It's stored only in your browser
-        and used to commit decision changes back to the repo.
+        To save decisions, paste a fine-grained GitHub personal access token below.
+        The token needs <strong>Contents: Read &amp; Write</strong> on
+        <code id="modal-repo-name">the repository</code>. Stored only in your browser.
       </p>
       <p class="modal-hint">
-        Don't have a token? Go to <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">github.com/settings/personal-access-tokens/new</a>,
-        select your repo, grant <em>Contents: Read and write</em>, then paste the token here.
+        Don't have a token?
+        <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">Create one here</a>,
+        grant <em>Contents: Read and write</em>, select your repo, then paste below.
       </p>
       <label class="modal-label" for="token-input">GitHub Token</label>
       <input id="token-input" type="password" class="modal-input" placeholder="github_pat_..." autocomplete="off" />
       <div class="modal-actions">
-        <button class="modal-btn secondary" id="token-clear">Clear Token</button>
-        <button class="modal-btn secondary" id="token-cancel">Cancel</button>
+        <button class="modal-btn" id="token-clear">Clear</button>
+        <button class="modal-btn" id="token-cancel">Cancel</button>
         <button class="modal-btn primary" id="token-save">Save</button>
       </div>
     </div>
@@ -852,108 +664,104 @@
 </div>
 
 <script>
-let APPS = []; // Loaded from apps.csv at runtime — see loadAppsFromCSV()
+// ═══════════════════════════════════════════════════════════════════════
+// CONFIG
+// ═══════════════════════════════════════════════════════════════════════
 
-// ── CSV LOADING ─────────────────────────────────
-// Fetches apps.csv from the repo, parses it, normalizes into the APPS array.
-// Runs once on page load before the first render.
-
+const GITHUB_CONFIG = {
+  owner: 'paulclintoc',
+  repo:  'rebecca-aitrendhunter',
+  path:  'index.html',
+  branch: 'main'
+};
 const CSV_FILENAME = 'apps.csv';
 
-async function loadAppsFromCSV() {
-  if (GITHUB_CONFIG.owner.startsWith('YOUR_')) {
-    showLoadError('GITHUB_CONFIG not set — cannot fetch CSV.');
-    return false;
-  }
+// Decisions baked into the file. The dashboard rewrites this block on every save.
+// DO NOT edit manually.
+// ── DECISIONS START ──
+const BAKED_DECISIONS = {};
+// ── DECISIONS END ──
 
+
+// ═══════════════════════════════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════════════════════════════
+
+let APPS = [];
+
+const state = {
+  tab: 'new',
+  verdicts: new Set(['GREEN', 'YELLOW', 'RED']),
+  category: '',
+  country: '',
+  search: '',
+  decisions: JSON.parse(JSON.stringify(BAKED_DECISIONS))
+};
+
+const SYNC = { status: 'idle', lastError: '', pending: false };
+
+
+// ═══════════════════════════════════════════════════════════════════════
+// TOKEN STORAGE
+// ═══════════════════════════════════════════════════════════════════════
+
+const TOKEN_KEY = 'aiHunter.githubToken.v1';
+function getToken() { try { return localStorage.getItem(TOKEN_KEY) || ''; } catch { return ''; } }
+function setToken(t) { try { localStorage.setItem(TOKEN_KEY, t); } catch {} }
+function clearToken() { try { localStorage.removeItem(TOKEN_KEY); } catch {} }
+
+
+// ═══════════════════════════════════════════════════════════════════════
+// CSV LOADING & PARSING
+// ═══════════════════════════════════════════════════════════════════════
+
+async function loadCsv() {
   const url = `https://raw.githubusercontent.com/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/${GITHUB_CONFIG.branch}/${CSV_FILENAME}?_=${Date.now()}`;
-
   try {
     const res = await fetch(url, { cache: 'no-store' });
-    if (!res.ok) {
-      throw new Error(`HTTP ${res.status} — is ${CSV_FILENAME} in the repo root?`);
-    }
-    const csvText = await res.text();
-    APPS = parseCsvToApps(csvText);
-    if (APPS.length === 0) {
-      throw new Error('CSV parsed but yielded zero apps. Check column headers.');
-    }
+    if (!res.ok) throw new Error(`HTTP ${res.status} — is ${CSV_FILENAME} in the repo root?`);
+    const text = await res.text();
+    const rows = parseCsv(text);
+    APPS = rows.map(rowToApp).filter(a => a.name);
+    if (APPS.length === 0) throw new Error('CSV parsed but yielded zero apps. Check column headers.');
     return true;
   } catch (e) {
-    console.error('[AI Hunter CSV load]', e);
-    showLoadError(`Failed to load ${CSV_FILENAME}: ${e.message}`);
+    document.getElementById('results').innerHTML =
+      `<div class="empty-state error">⚠ ${e.message}</div>`;
+    console.error('[CSV load]', e);
     return false;
   }
 }
 
-function showLoadError(msg) {
-  const results = document.getElementById('results');
-  if (results) {
-    results.innerHTML = `<div class="empty-state" style="color: var(--red); border-color: var(--red-rule); background: var(--red-bg);">⚠ ${msg}</div>`;
-  }
-}
-
-// ── CSV parser ─────────────────────────────────
-// RFC 4180-ish: handles quoted fields, commas inside quotes, escaped quotes (""),
-// and CRLF/LF line endings. Returns an array of row objects keyed by header name.
+// RFC 4180-ish parser. Handles quoted fields, escaped quotes, CRLF/LF.
 function parseCsv(text) {
+  text = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
   const rows = [];
   let row = [];
   let field = '';
   let inQuotes = false;
   let i = 0;
-
-  // Normalize line endings
-  text = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
-
   while (i < text.length) {
     const c = text[i];
     if (inQuotes) {
       if (c === '"') {
-        if (text[i + 1] === '"') {
-          field += '"';
-          i += 2;
-        } else {
-          inQuotes = false;
-          i++;
-        }
-      } else {
-        field += c;
-        i++;
-      }
+        if (text[i + 1] === '"') { field += '"'; i += 2; }
+        else { inQuotes = false; i++; }
+      } else { field += c; i++; }
     } else {
-      if (c === '"') {
-        inQuotes = true;
-        i++;
-      } else if (c === ',') {
-        row.push(field);
-        field = '';
-        i++;
-      } else if (c === '\n') {
-        row.push(field);
-        rows.push(row);
-        row = [];
-        field = '';
-        i++;
-      } else {
-        field += c;
-        i++;
-      }
+      if (c === '"') { inQuotes = true; i++; }
+      else if (c === ',') { row.push(field); field = ''; i++; }
+      else if (c === '\n') { row.push(field); rows.push(row); row = []; field = ''; i++; }
+      else { field += c; i++; }
     }
   }
-  // Flush final field/row
-  if (field.length > 0 || row.length > 0) {
-    row.push(field);
-    rows.push(row);
-  }
+  if (field.length > 0 || row.length > 0) { row.push(field); rows.push(row); }
 
-  // Convert to objects using the first row as headers
   if (rows.length === 0) return [];
   const headers = rows[0].map(h => h.trim());
   const out = [];
   for (let r = 1; r < rows.length; r++) {
     const cells = rows[r];
-    // Skip fully-empty rows
     if (cells.every(c => !c || !c.trim())) continue;
     const obj = {};
     for (let h = 0; h < headers.length; h++) {
@@ -964,251 +772,80 @@ function parseCsv(text) {
   return out;
 }
 
-// ── Transform raw CSV rows into APP objects matching the dashboard's expected shape
-function parseCsvToApps(csvText) {
-  const rows = parseCsv(csvText);
-  const apps = [];
+function rowToApp(row) {
+  const name = row['App Name'] || '';
+  const downloads = parseNumber(row['Last 30D Downloads WW']);
+  const revenue = parseNumber(row['Last 30D Revenue WW']);
+  const rpd = downloads > 0 ? Math.round((revenue / downloads) * 100) / 100 : 0;
 
-  for (const row of rows) {
-    const name = row['App Name'];
-    if (!name) continue;
-
-    const downloads = parseNumber(row['Last 30D Downloads WW']);
-    const revenue = parseNumber(row['Last 30D Revenue WW']);
-    const rpd = downloads > 0 ? Math.round((revenue / downloads) * 100) / 100 : 0;
-
-    const verdict = parseVerdict(row['Market Verdict']);
-
-    const keywords = [];
-    for (const i of [1, 2, 3]) {
-      const term = row[`Keyword ${i}`];
-      const results = row[`KW${i} Results`] || '';
-      const link = row[`KW${i} Advanced Search Link`] || '';
-      if (!term || term.toLowerCase().startsWith('(skipped')) continue;
-      const count = extractCount(results);
-      const density = densityLabel(count, results);
-      const finding = extractFinding(results);
-      keywords.push({
-        term: term,
-        count: count >= 0 ? count : 100,
-        density: density,
-        finding: finding,
-        link: link
-      });
-    }
-
-    const findings = splitFindings(row['How They Get Their Money'] || '');
-
-    apps.push({
-      name: name,
-      verdict: verdict,
-      category: row['Category'] || '',
-      released: row['Release Date'] || '',
-      downloads: downloads,
-      revenue: revenue,
-      ads: normalizeAds(row['Ads Network']),
-      rpd: rpd,
-      stLink: row['Sensor Tower Link'] || '',
-      description: row['App Description'] || row['Description'] || '',
-      why: row['Why it could work / not work'] || row['Why Simple'] || '',
-      findings: findings,
-      keywords: keywords
+  const keywords = [];
+  for (const i of [1, 2, 3]) {
+    const term = (row[`Keyword ${i}`] || '').trim();
+    if (!term || term.toLowerCase().startsWith('(skipped')) continue;
+    keywords.push({
+      term: term,
+      result: row[`KW${i} Results`] || '',
+      link: row[`KW${i} Advanced Search Link`] || ''
     });
   }
 
-  return apps;
+  return {
+    name: name,
+    country: row['Country'] || '',
+    category: row['Category'] || '',
+    released: row['Release Date'] || '',
+    downloads: downloads,
+    revenue: revenue,
+    ads: row['Ads Network'] || '',
+    rpd: rpd,
+    stLink: row['Sensor Tower Link'] || '',
+    verdict: parseVerdict(row['Market Verdict']),
+    verdictText: row['Market Verdict'] || '',
+    description: row['App Description'] || '',
+    why: row['Why it could work / not work'] || '',
+    keywords: keywords
+  };
 }
 
 function parseNumber(s) {
   if (!s) return 0;
-  const cleaned = String(s).replace(/[\$,\s]/g, '');
-  const n = parseInt(cleaned, 10);
+  const n = parseInt(String(s).replace(/[\$,\s]/g, ''), 10);
   return isNaN(n) ? 0 : n;
 }
 
 function parseVerdict(s) {
   if (!s) return 'YELLOW';
-  const upper = s.toUpperCase();
-  if (upper.includes('GREEN') || s.includes('🟢')) return 'GREEN';
-  if (upper.includes('RED') || s.includes('🔴')) return 'RED';
+  if (s.includes('🟢') || /\bGREEN\b/i.test(s)) return 'GREEN';
+  if (s.includes('🔴') || /\bRED\b/i.test(s)) return 'RED';
   return 'YELLOW';
 }
 
-function normalizeAds(s) {
-  if (!s) return 'N/A';
-  const lower = s.toLowerCase();
-  if (lower.startsWith('inactive')) return 'Inactive';
-  if (lower.startsWith('active')) return 'Active';
-  if (lower.startsWith('new')) return 'New';
-  if (lower.includes('not extracted') || lower === 'n/a' || !s.trim()) return 'N/A';
-  return s;
-}
 
-function extractCount(text) {
-  if (!text) return -1;
-  const lower = text.toLowerCase();
-  if (lower.startsWith('(skipped') || lower.startsWith('(not extracted')) return -1;
+// ═══════════════════════════════════════════════════════════════════════
+// GITHUB SYNC
+// ═══════════════════════════════════════════════════════════════════════
 
-  let m = text.match(/~\s*([\d,]+)/);
-  if (m) return parseInt(m[1].replace(/,/g, ''), 10);
-  m = text.match(/([\d,]+)\s*results?/i);
-  if (m) return parseInt(m[1].replace(/,/g, ''), 10);
-  m = text.match(/(\d+)\s*(?:\+|result)/);
-  if (m) return parseInt(m[1], 10);
-  m = text.match(/(\d+)\s*pages?/i);
-  if (m) return parseInt(m[1], 10) * 25;
-  return -1;
-}
-
-function densityLabel(count, resultsText) {
-  const t = (resultsText || '').toLowerCase();
-
-  // Strong "empty" signals — niche is functionally wide open
-  const emptySignals = [
-    'all dead', 'mostly dead', 'all with 0', 'all w/ 0', 'all 0 dl',
-    '0 downloads', '0 dls/$0', 'all near 0', 'all near-$0',
-    'niche empty', 'niche completely empty', 'completely empty',
-    'no real player', 'only 1 dead', 'only 1 active', 'only one real',
-    'no established players', 'no 3rd real', 'no dominant',
-    'mostly poker games'
-  ];
-  if (emptySignals.some(sig => t.includes(sig))) return 'empty';
-
-  // "dominates" in a small niche is also an empty signal
-  if (count > 0 && count <= 75 && (t.includes('dominate') || t.includes('leads') || t.includes('sole real'))) {
-    return 'empty';
-  }
-
-  if (count < 0) return 'light';
-  if (count <= 25) return 'empty';
-  if (count <= 100) return 'light';
-  if (count <= 250) return 'medium';
-  if (count <= 800) return 'heavy';
-  return 'saturated';
-}
-
-function extractFinding(text) {
-  if (!text) return '';
-  const s = text.trim();
-  if (s.includes('—')) {
-    const parts = s.split('—');
-    return parts[parts.length - 1].trim();
-  }
-  if (s.includes(' - ') && s.split(' - ')[0].toLowerCase().includes('result')) {
-    return s.split(' - ').slice(1).join(' - ').trim();
-  }
-  return s;
-}
-
-function splitFindings(monetization) {
-  if (!monetization) return [];
-  const s = monetization.trim();
-  // Split on '. ' but keep meaningful chunks
-  const chunks = s.split(/\.\s+(?=[A-Z\$])/);
-  const findings = [];
-  for (const c of chunks) {
-    const trimmed = c.trim().replace(/\.$/, '');
-    if (trimmed && trimmed.length > 5) findings.push(trimmed + '.');
-  }
-  return findings.slice(0, 5);
-}
-
-// ── GITHUB SYNC CONFIG ─────────────────────────────────
-// FILL THESE IN with your repo details before deploying.
-const GITHUB_CONFIG = {
-  owner: 'paulclintoc',
-  repo:  'rebecca-aitrendhunter',
-  path:  'index.html',
-  branch: 'main'
-};
-
-// Decisions baked into this file. Auto-updated by the dashboard via the GitHub API.
-// DO NOT manually edit this block — the dashboard rewrites it on every save.
-// ── DECISIONS START ──
-const BAKED_DECISIONS = {};
-// ── DECISIONS END ──
-
-// ── BUILD ─────────────────────────────────────────────────────
-const state = {
-  tab: 'new',
-  verdicts: new Set(['GREEN', 'YELLOW', 'RED']),
-  category: '',
-  ads: '',
-  search: '',
-  // Start from the baked-in decisions (the source of truth from the repo).
-  // Deep-clone so mutations don't affect the original object.
-  decisions: JSON.parse(JSON.stringify(BAKED_DECISIONS))
-};
-
-// ── token management ─────────────────────────────────
-const TOKEN_KEY = 'aiHunter.githubToken.v1';
-function getToken() {
-  try { return localStorage.getItem(TOKEN_KEY) || ''; }
-  catch (e) { return ''; }
-}
-function setToken(t) {
-  try { localStorage.setItem(TOKEN_KEY, t); }
-  catch (e) { /* ignore */ }
-}
-function clearToken() {
-  try { localStorage.removeItem(TOKEN_KEY); }
-  catch (e) { /* ignore */ }
-}
-
-// ── sync state + UI indicator ─────────────────────────────────
-const SYNC = {
-  status: 'idle',      // 'idle' | 'saving' | 'error' | 'config-missing' | 'no-token'
-  lastError: '',
-  pending: false       // a save was requested while one was in flight
-};
-
-function updateSyncIndicator() {
-  const el = document.getElementById('sync-indicator');
-  if (!el) return;
-  const messages = {
-    idle:           { text: '● Synced',        cls: 'ok' },
-    saving:         { text: '↻ Saving…',       cls: 'busy' },
-    error:          { text: '⚠ Sync error',    cls: 'err' },
-    'config-missing': { text: '⚙ Setup needed', cls: 'err' },
-    'no-token':     { text: '🔒 Set up token',  cls: 'warn' }
-  };
-  const m = messages[SYNC.status] || messages.idle;
-  el.textContent = m.text;
-  el.className = 'sync-indicator ' + m.cls;
-  el.title = SYNC.lastError || '';
-}
-
-// ── decision mutation ─────────────────────────────────
 function setDecision(appName, status) {
-  // toggle: clicking the same status again removes it (back to 'new')
   const current = state.decisions[appName];
   if (current && current.status === status) {
     delete state.decisions[appName];
   } else {
     state.decisions[appName] = { status, at: new Date().toISOString() };
   }
-  scheduleSyncToGitHub();
+  scheduleSync();
 }
+
 function getStatus(appName) {
   return state.decisions[appName]?.status || 'new';
 }
 
-// ── GitHub commit ─────────────────────────────────
-// Debounce: rapid clicks batch into one commit ~800ms after the last click.
 let syncTimer = null;
-function scheduleSyncToGitHub() {
+function scheduleSync() {
   if (syncTimer) clearTimeout(syncTimer);
   syncTimer = setTimeout(() => { syncTimer = null; syncToGitHub(); }, 800);
 }
 
 async function syncToGitHub(isRetry = false) {
-  // Config check
-  if (GITHUB_CONFIG.owner.startsWith('YOUR_')) {
-    SYNC.status = 'config-missing';
-    SYNC.lastError = 'GITHUB_CONFIG not set in the HTML file. Edit the constants near the top.';
-    updateSyncIndicator();
-    return;
-  }
   const token = getToken();
   if (!token) {
     SYNC.status = 'no-token';
@@ -1216,10 +853,7 @@ async function syncToGitHub(isRetry = false) {
     updateSyncIndicator();
     return;
   }
-  // Only enforce the "one save at a time" guard for fresh saves, not retries.
-  // A retry is part of an already-in-flight save and must be allowed through.
   if (!isRetry && SYNC.status === 'saving') {
-    // Already in flight — mark a follow-up. The current save's success handler will fire another sync.
     SYNC.pending = true;
     return;
   }
@@ -1227,7 +861,7 @@ async function syncToGitHub(isRetry = false) {
   SYNC.status = 'saving';
   updateSyncIndicator();
 
-  const apiBase = `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/${GITHUB_CONFIG.path}`;
+  const apiUrl = `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/${GITHUB_CONFIG.path}`;
   const headers = {
     'Authorization': `Bearer ${token}`,
     'Accept': 'application/vnd.github+json',
@@ -1235,284 +869,199 @@ async function syncToGitHub(isRetry = false) {
   };
 
   try {
-    // 1. Fetch current file (cache-buster prevents GitHub's CDN from serving a stale SHA)
-    const getRes = await fetch(`${apiBase}?ref=${GITHUB_CONFIG.branch}&_=${Date.now()}`, {
-      headers,
-      cache: 'no-store'
+    const getRes = await fetch(`${apiUrl}?ref=${GITHUB_CONFIG.branch}&_=${Date.now()}`, {
+      headers, cache: 'no-store'
     });
-    if (!getRes.ok) {
-      throw new Error(`Fetch failed (${getRes.status}): ${await getRes.text()}`);
-    }
-    const fileData = await getRes.json();
-    // Decode base64 → string (handles unicode)
-    const currentContent = decodeURIComponent(escape(atob(fileData.content.replace(/\n/g, ''))));
+    if (!getRes.ok) throw new Error(`Fetch failed (${getRes.status}): ${await getRes.text()}`);
+    const file = await getRes.json();
+    const current = decodeURIComponent(escape(atob(file.content.replace(/\n/g, ''))));
 
-    // 2. Patch the BAKED_DECISIONS block. Use the start/end markers.
     const marker = /(\/\/ ── DECISIONS START ──\nconst BAKED_DECISIONS = )(\{[\s\S]*?\});(\n\/\/ ── DECISIONS END ──)/;
-    if (!marker.test(currentContent)) {
-      throw new Error('Could not find DECISIONS markers in the HTML file.');
-    }
+    if (!marker.test(current)) throw new Error('Could not find DECISIONS markers in HTML file.');
+
     const newJson = JSON.stringify(state.decisions, null, 2);
-    const newContent = currentContent.replace(marker, `$1${newJson};$3`).replace(/;;(\n\/\/ ── DECISIONS END ──)/, ';$1');
+    const updated = current.replace(marker, `$1${newJson};$3`).replace(/;;(\n\/\/ ── DECISIONS END ──)/, ';$1');
 
-    // Skip commit if content is identical (no real change)
-    if (newContent === currentContent) {
-      SYNC.status = 'idle';
-      updateSyncIndicator();
-      return;
+    if (updated === current) {
+      SYNC.status = 'idle'; updateSyncIndicator(); return;
     }
 
-    // 3. Encode and commit
-    const encoded = btoa(unescape(encodeURIComponent(newContent)));
-    const commitMsg = `Decisions update (${Object.keys(state.decisions).length} marked)`;
-    const putRes = await fetch(apiBase, {
+    const encoded = btoa(unescape(encodeURIComponent(updated)));
+    const msg = `Decisions update (${Object.keys(state.decisions).length} marked)`;
+    const putRes = await fetch(apiUrl, {
       method: 'PUT',
       headers: { ...headers, 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        message: commitMsg,
-        content: encoded,
-        sha: fileData.sha,
-        branch: GITHUB_CONFIG.branch
-      })
+      body: JSON.stringify({ message: msg, content: encoded, sha: file.sha, branch: GITHUB_CONFIG.branch })
     });
 
     if (putRes.status === 409 || putRes.status === 422) {
-      // Conflict — GitHub returned a stale SHA. Wait a moment and retry with fresh fetch.
       if (!isRetry) {
         await new Promise(r => setTimeout(r, 600));
         return syncToGitHub(true);
       }
       throw new Error(`Conflict after retry (${putRes.status}). Reload the page.`);
     }
-    if (!putRes.ok) {
-      throw new Error(`Commit failed (${putRes.status}): ${await putRes.text()}`);
-    }
+    if (!putRes.ok) throw new Error(`Commit failed (${putRes.status}): ${await putRes.text()}`);
 
-    SYNC.status = 'idle';
-    SYNC.lastError = '';
-    updateSyncIndicator();
-
-    if (SYNC.pending) {
-      SYNC.pending = false;
-      scheduleSyncToGitHub();
-    }
+    SYNC.status = 'idle'; SYNC.lastError = ''; updateSyncIndicator();
+    if (SYNC.pending) { SYNC.pending = false; scheduleSync(); }
   } catch (e) {
-    SYNC.status = 'error';
-    SYNC.lastError = e.message;
-    updateSyncIndicator();
-    console.error('[AI Hunter sync]', e);
+    SYNC.status = 'error'; SYNC.lastError = e.message; updateSyncIndicator();
+    console.error('[Sync]', e);
   }
 }
 
 async function pullFromGitHub() {
-  // On page load, fetch the latest version of this file from GitHub to pick up
-  // any decisions other team members made since the cached version we loaded.
-  //
-  // This works WITHOUT a token (public repo reads don't need auth), which means
-  // incognito/anonymous viewers also see the latest state — they just can't save.
-  if (GITHUB_CONFIG.owner.startsWith('YOUR_')) return;
-
   try {
     const token = getToken();
-    // Use the raw.githubusercontent.com endpoint with a cache-buster — this is
-    // public for public repos, no token needed, and bypasses the GitHub Pages CDN.
     const rawUrl = `https://raw.githubusercontent.com/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/${GITHUB_CONFIG.branch}/${GITHUB_CONFIG.path}?_=${Date.now()}`;
-
-    const fetchOpts = { cache: 'no-store' };
-    if (token) {
-      fetchOpts.headers = { 'Authorization': `Bearer ${token}` };
-    }
-
-    const res = await fetch(rawUrl, fetchOpts);
-    if (!res.ok) {
-      // Fall back to the API endpoint if raw fails (e.g. private repo without token)
-      if (!token) return;
-      const apiBase = `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/${GITHUB_CONFIG.path}?ref=${GITHUB_CONFIG.branch}&_=${Date.now()}`;
-      const apiRes = await fetch(apiBase, {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Accept': 'application/vnd.github+json',
-          'X-GitHub-Api-Version': '2022-11-28'
-        },
-        cache: 'no-store'
-      });
-      if (!apiRes.ok) return;
-      const data = await apiRes.json();
-      const content = decodeURIComponent(escape(atob(data.content.replace(/\n/g, ''))));
-      applyFreshDecisions(content);
-      return;
-    }
+    const opts = { cache: 'no-store' };
+    if (token) opts.headers = { 'Authorization': `Bearer ${token}` };
+    const res = await fetch(rawUrl, opts);
+    if (!res.ok) return;
     const content = await res.text();
-    applyFreshDecisions(content);
-  } catch (e) {
-    console.warn('[AI Hunter] Pull-on-load failed:', e);
-  }
-}
-
-function applyFreshDecisions(content) {
-  const m = content.match(/\/\/ ── DECISIONS START ──\nconst BAKED_DECISIONS = (\{[\s\S]*?\});\n\/\/ ── DECISIONS END ──/);
-  if (m) {
-    try {
-      const fresh = JSON.parse(m[1]);
-      state.decisions = fresh;
-      updateTabCounts();
-      render();
-    } catch (e) {
-      console.warn('[AI Hunter] Could not parse fresh decisions:', e);
+    const m = content.match(/\/\/ ── DECISIONS START ──\nconst BAKED_DECISIONS = (\{[\s\S]*?\});\n\/\/ ── DECISIONS END ──/);
+    if (m) {
+      try {
+        state.decisions = JSON.parse(m[1]);
+        updateTabCounts();
+        render();
+      } catch (e) { console.warn('[Pull] parse error', e); }
     }
-  }
+  } catch (e) { console.warn('[Pull]', e); }
 }
 
-// ── token setup dialog ─────────────────────────────────
-function showTokenDialog() {
-  const dlg = document.getElementById('token-dialog');
-  document.getElementById('token-input').value = getToken();
-  dlg.style.display = 'flex';
+function updateSyncIndicator() {
+  const el = document.getElementById('sync-indicator');
+  if (!el) return;
+  const map = {
+    idle: { text: '● Synced', cls: 'ok' },
+    saving: { text: '↻ Saving…', cls: 'busy' },
+    error: { text: '⚠ Sync error', cls: 'err' },
+    'no-token': { text: '🔒 Set up token', cls: 'warn' }
+  };
+  const m = map[SYNC.status] || map.idle;
+  el.textContent = m.text;
+  el.className = 'sync-indicator ' + m.cls;
+  el.title = SYNC.lastError || '';
 }
-function hideTokenDialog() {
-  document.getElementById('token-dialog').style.display = 'none';
-}
+
+
+// ═══════════════════════════════════════════════════════════════════════
+// FORMATTERS
+// ═══════════════════════════════════════════════════════════════════════
 
 const fmt = {
   num(n) {
-    if (n >= 1_000_000) return (n/1_000_000).toFixed(1).replace(/\.0$/,'') + 'M';
-    if (n >= 1_000) return (n/1_000).toFixed(0) + 'K';
+    if (n >= 1_000_000) return (n / 1_000_000).toFixed(1).replace(/\.0$/, '') + 'M';
+    if (n >= 1_000) return (n / 1_000).toFixed(0) + 'K';
     return n.toLocaleString();
   },
   money(n) {
-    if (n >= 1_000_000) return '$' + (n/1_000_000).toFixed(1).replace(/\.0$/,'') + 'M';
-    if (n >= 1_000) return '$' + (n/1_000).toFixed(1).replace(/\.0$/,'') + 'K';
+    if (n >= 1_000_000) return '$' + (n / 1_000_000).toFixed(1).replace(/\.0$/, '') + 'M';
+    if (n >= 1_000) return '$' + (n / 1_000).toFixed(1).replace(/\.0$/, '') + 'K';
     return '$' + n.toLocaleString();
   },
   rpd(n) { return '$' + n.toFixed(2); },
-  date(s) {
-    const d = new Date(s);
-    return d.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
-  },
   stampDate(iso) {
     const d = new Date(iso);
     return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) +
       ' · ' + d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
   },
-  density(c) {
-    if (c < 15) return '<15 apps';
-    if (c < 100) return '~' + c + ' apps';
-    if (c < 1000) return '~' + c + ' apps';
-    return '~' + Math.round(c/100)/10 + 'k apps';
-  }
+  esc(s) { return String(s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 };
 
-function buildCardHTML(app, openByDefault) {
+
+// ═══════════════════════════════════════════════════════════════════════
+// RENDER
+// ═══════════════════════════════════════════════════════════════════════
+
+function buildCardHTML(app) {
   const v = app.verdict.toLowerCase();
-  const releasedLabel = fmt.date(app.released);
   const decision = state.decisions[app.name];
   const status = decision?.status || 'new';
+  const decidedCls = decision ? `decided ${status}` : '';
 
-  const keywordsHTML = app.keywords.map(k => `
-    <tr class="kw-row">
-      <td class="kw-term">${k.term}</td>
-      <td class="kw-density ${k.density}"><span class="count">${fmt.density(k.count)}</span></td>
-      <td class="kw-finding">${k.finding}</td>
-      <td class="kw-link"><a href="${k.link}" target="_blank" rel="noopener" onclick="event.stopPropagation()">sensor tower link →</a></td>
-    </tr>
-  `).join('');
-
-  const findingsHTML = app.findings.map(f => `<li>${f}</li>`).join('');
-  const whyLabel = v === 'red' ? 'Why it won\'t work' : 'Why it could work';
-
-  // Decision buttons — clicking a status you already have removes it (toggle to 'new')
   const doActive = status === 'do';
   const interestingActive = status === 'interesting';
   const skipActive = status === 'skip';
-  const decisionBarHTML = `
-    <div class="decision-bar">
-      <button class="decision-btn do ${doActive ? 'active' : ''}"
-              data-action="do" data-app="${app.name.replace(/"/g, '&quot;')}"
-              title="${doActive ? 'Click to undo' : 'Mark as We Do'}">
-        <span class="icon">${doActive ? '✓' : '+'}</span>We Do
-      </button>
-      <button class="decision-btn interesting ${interestingActive ? 'active' : ''}"
-              data-action="interesting" data-app="${app.name.replace(/"/g, '&quot;')}"
-              title="${interestingActive ? 'Click to undo' : 'Mark as Interesting'}">
-        <span class="icon">${interestingActive ? '★' : '☆'}</span>Interesting
-      </button>
-      <button class="decision-btn skip ${skipActive ? 'active' : ''}"
-              data-action="skip" data-app="${app.name.replace(/"/g, '&quot;')}"
-              title="${skipActive ? 'Click to undo' : 'Mark as Skip'}">
-        <span class="icon">${skipActive ? '✗' : '−'}</span>We Don't
-      </button>
+
+  const keywordsHTML = app.keywords.length === 0 ? '' : `
+    <div class="body-section">
+      <div class="body-title">Keywords Searched</div>
+      <table class="kw-table">
+        ${app.keywords.map(k => `
+          <tr class="kw-row">
+            <td class="kw-term">${fmt.esc(k.term)}</td>
+            <td class="kw-result">${fmt.esc(k.result)}</td>
+            <td class="kw-link">${k.link ? `<a href="${fmt.esc(k.link)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">search →</a>` : ''}</td>
+          </tr>
+        `).join('')}
+      </table>
     </div>
   `;
 
-  // Status stamp — only shown if decided
-  const statusLabels = {
-    do: '✓ Marked We Do',
-    interesting: '★ Marked Interesting',
-    skip: "✗ Marked We Don't"
-  };
-  const statusStampHTML = decision ? `
-    <div class="status-stamp ${status}">
-      <span class="status-label">${statusLabels[status]}</span>
-      <span class="status-date">${fmt.stampDate(decision.at)}</span>
+  const whyHTML = app.why ? `
+    <div class="body-section">
+      <div class="body-title">Why It Could Work / Not Work</div>
+      <div class="body-text">${fmt.esc(app.why)}</div>
     </div>
   ` : '';
 
-  const decidedClass = decision ? `decided ${status}` : '';
+  const verdictTextHTML = app.verdictText ? `
+    <div class="body-section">
+      <div class="body-title">Market Verdict</div>
+      <div class="body-text">${fmt.esc(app.verdictText)}</div>
+    </div>
+  ` : '';
+
+  const statusStampHTML = decision ? `
+    <div class="status-stamp ${status}">
+      <span class="status-label">${
+        status === 'do' ? '✓ Marked We Do' :
+        status === 'interesting' ? '★ Marked Interesting' :
+        "✗ Marked We Don't"
+      }</span>
+      <span>${fmt.stampDate(decision.at)}</span>
+    </div>
+  ` : '';
 
   return `
-    <article class="card ${v} ${decidedClass} ${openByDefault ? 'expanded' : ''}" data-verdict="${app.verdict}" data-category="${app.category}" data-ads="${app.ads}" data-name="${app.name.toLowerCase()}" data-status="${status}">
+    <article class="card ${v} ${decidedCls}" data-name="${fmt.esc(app.name)}" data-verdict="${app.verdict}">
       <div class="card-head">
-        <div class="card-head-top">
-          <div class="card-head-title">
+        <div class="card-top">
+          <div class="card-title">
             <span class="verdict-pill">${app.verdict}</span>
-            <div class="app-title-block">
-              <h3 class="app-name">${app.name}</h3>
-              ${app.description ? `<p class="app-description">${app.description}</p>` : ''}
+            <div class="name-block">
+              <h3 class="app-name">${fmt.esc(app.name)}</h3>
+              ${app.description ? `<p class="app-description">${fmt.esc(app.description)}</p>` : ''}
             </div>
           </div>
-          <div class="card-head-actions">
-            ${decisionBarHTML}
-            <a class="st-button" href="${app.stLink}" target="_blank" rel="noopener" onclick="event.stopPropagation()">Sensor Tower ↗</a>
+          <div class="card-actions">
+            <div class="decision-bar">
+              <button class="decision-btn do ${doActive ? 'active' : ''}" data-action="do" data-app="${fmt.esc(app.name)}">${doActive ? '✓' : '+'} We Do</button>
+              <button class="decision-btn interesting ${interestingActive ? 'active' : ''}" data-action="interesting" data-app="${fmt.esc(app.name)}">${interestingActive ? '★' : '☆'} Interesting</button>
+              <button class="decision-btn skip ${skipActive ? 'active' : ''}" data-action="skip" data-app="${fmt.esc(app.name)}">${skipActive ? '✗' : '−'} We Don't</button>
+            </div>
+            ${app.stLink ? `<a class="st-button" href="${fmt.esc(app.stLink)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">Sensor Tower ↗</a>` : ''}
             <span class="expand-toggle">▾</span>
           </div>
         </div>
         <div class="meta-row">
-          <div class="meta-cell">
-            <span class="meta-lbl">Category</span>
-            <span class="meta-val">${app.category}</span>
-          </div>
-          <div class="meta-cell">
-            <span class="meta-lbl">Release Date</span>
-            <span class="meta-val mono">${releasedLabel}</span>
-          </div>
-          <div class="meta-cell">
-            <span class="meta-lbl">Downloads</span>
-            <span class="meta-val mono">${fmt.num(app.downloads)}</span>
-          </div>
-          <div class="meta-cell">
-            <span class="meta-lbl">Revenue</span>
-            <span class="meta-val mono">${fmt.money(app.revenue)}</span>
-          </div>
-          <div class="meta-cell">
-            <span class="meta-lbl">RPD</span>
-            <span class="meta-val mono">${fmt.rpd(app.rpd)}</span>
-          </div>
+          ${app.country ? `<div class="meta-cell"><span class="meta-lbl">Country</span><span class="meta-val">${fmt.esc(app.country)}</span></div>` : ''}
+          ${app.category ? `<div class="meta-cell"><span class="meta-lbl">Category</span><span class="meta-val">${fmt.esc(app.category)}</span></div>` : ''}
+          ${app.released ? `<div class="meta-cell"><span class="meta-lbl">Released</span><span class="meta-val mono">${fmt.esc(app.released)}</span></div>` : ''}
+          <div class="meta-cell"><span class="meta-lbl">Downloads</span><span class="meta-val mono">${fmt.num(app.downloads)}</span></div>
+          <div class="meta-cell"><span class="meta-lbl">Revenue</span><span class="meta-val mono">${fmt.money(app.revenue)}</span></div>
+          <div class="meta-cell"><span class="meta-lbl">RPD</span><span class="meta-val mono">${fmt.rpd(app.rpd)}</span></div>
+          ${app.ads ? `<div class="meta-cell"><span class="meta-lbl">Ads</span><span class="meta-val">${fmt.esc(app.ads)}</span></div>` : ''}
         </div>
         ${statusStampHTML}
       </div>
       <div class="card-body">
-        <div class="block-why">
-          <div class="block-title">${whyLabel}</div>
-          <p class="why-text">${app.why}</p>
-        </div>
-        <div class="block-findings">
-          <div class="block-title">AI Findings</div>
-          <ul class="findings">${findingsHTML}</ul>
-        </div>
-        <div class="keywords">
-          <div class="block-title">Keywords searched · what's in the market</div>
-          <table class="kw-table">${keywordsHTML}</table>
-        </div>
+        ${whyHTML}
+        ${verdictTextHTML}
+        ${keywordsHTML}
       </div>
     </article>
   `;
@@ -1527,15 +1076,13 @@ function updateTabCounts() {
   document.getElementById('tc-skip').textContent = counts.skip;
 }
 
-
 function render() {
   const results = document.getElementById('results');
   const filtered = APPS.filter(a => {
-    // tab filter (status)
     if (getStatus(a.name) !== state.tab) return false;
     if (!state.verdicts.has(a.verdict)) return false;
     if (state.category && a.category !== state.category) return false;
-    if (state.ads && a.ads !== state.ads) return false;
+    if (state.country && a.country !== state.country) return false;
     if (state.search) {
       const q = state.search.toLowerCase();
       if (!a.name.toLowerCase().includes(q) && !a.category.toLowerCase().includes(q)) return false;
@@ -1543,83 +1090,49 @@ function render() {
     return true;
   });
 
-  // group by verdict
   const groups = { GREEN: [], YELLOW: [], RED: [] };
   filtered.forEach(a => groups[a.verdict].push(a));
-
-  // sort within: by rpd desc
-  Object.values(groups).forEach(g => g.sort((a,b) => b.rpd - a.rpd));
-
-  // empty-state messages vary by tab
-  const emptyMessages = {
-    new: 'All caught up — no new opportunities matching these filters.',
-    do: 'No apps marked "We Do" yet. Open the New Opportunities tab to start reviewing.',
-    interesting: 'No apps marked "Interesting" yet.',
-    skip: 'No apps marked "We Don\'t" yet.'
-  };
+  Object.values(groups).forEach(g => g.sort((a, b) => b.rpd - a.rpd));
 
   let html = '';
-  if (groups.GREEN.length) {
-    html += `<div class="section-head green"><span class="label">Green</span><span class="blurb">Worth pursuing · ${groups.GREEN.length}</span><span class="rule"></span></div>`;
-    html += groups.GREEN.map(a => buildCardHTML(a, false)).join('');
-  }
-  if (groups.YELLOW.length) {
-    html += `<div class="section-head yellow"><span class="label">Yellow</span><span class="blurb">Mixed signals · ${groups.YELLOW.length}</span><span class="rule"></span></div>`;
-    html += groups.YELLOW.map(a => buildCardHTML(a, false)).join('');
-  }
-  if (groups.RED.length) {
-    html += `<div class="section-head red"><span class="label">Red</span><span class="blurb">Avoid · ${groups.RED.length}</span><span class="rule"></span></div>`;
-    html += groups.RED.map(a => buildCardHTML(a, false)).join('');
-  }
-  if (!filtered.length) {
-    html = `<div class="empty-state">${emptyMessages[state.tab]}</div>`;
-  }
-  results.innerHTML = html;
+  ['GREEN', 'YELLOW', 'RED'].forEach(v => {
+    if (groups[v].length === 0) return;
+    html += `<div class="section-head ${v.toLowerCase()}">
+      <span class="section-label">${v}</span>
+      <span class="section-count">${groups[v].length} apps</span>
+      <span class="section-rule"></span>
+    </div>`;
+    html += groups[v].map(buildCardHTML).join('');
+  });
 
-  // wire collapsible cards (all cards are collapsible now)
-  results.querySelectorAll('.card .card-head').forEach(head => {
-    head.addEventListener('click', (e) => {
-      // ignore clicks on the decision buttons / sensor tower / keyword links
+  if (filtered.length === 0) {
+    const messages = {
+      new: 'No apps match the current filters.',
+      do: 'No apps marked "We Do" yet.',
+      interesting: 'No apps marked "Interesting" yet.',
+      skip: 'No apps marked "We Don\'t" yet.'
+    };
+    html = `<div class="empty-state">${messages[state.tab]}</div>`;
+  }
+
+  results.innerHTML = html;
+  wireCardInteractions();
+  updateTabCounts();
+}
+
+function wireCardInteractions() {
+  document.querySelectorAll('.card .card-head').forEach(head => {
+    head.addEventListener('click', e => {
       if (e.target.closest('.decision-btn') || e.target.closest('a')) return;
       head.parentElement.classList.toggle('expanded');
     });
   });
-
-  // wire decision buttons — update the card in place, no full re-render
-  results.querySelectorAll('.decision-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const appName = btn.dataset.app;
-      const action = btn.dataset.action;
-      setDecision(appName, action);
-      updateTabCounts();
-
-      // find the card, preserve its expanded state, swap its HTML in place
-      const card = btn.closest('.card');
-      const app = APPS.find(a => a.name === appName);
-      const wasExpanded = card.classList.contains('expanded');
-      const newCard = document.createElement('div');
-      newCard.innerHTML = buildCardHTML(app, wasExpanded).trim();
-      const replacement = newCard.firstChild;
-
-      // rewire the new card's interactions
-      replacement.querySelector('.card-head').addEventListener('click', (e) => {
-        if (e.target.closest('.decision-btn') || e.target.closest('a')) return;
-        replacement.classList.toggle('expanded');
-      });
-      replacement.querySelectorAll('.decision-btn').forEach(b => {
-        b.addEventListener('click', wireDecisionClick);
-      });
-
-      card.replaceWith(replacement);
-    });
+  document.querySelectorAll('.decision-btn').forEach(btn => {
+    btn.addEventListener('click', handleDecisionClick);
   });
-
-  updateTabCounts();
 }
 
-// Extracted so the in-place card swap above can re-attach the same handler
-function wireDecisionClick(e) {
+function handleDecisionClick(e) {
   e.stopPropagation();
   const btn = e.currentTarget;
   const appName = btn.dataset.app;
@@ -1627,96 +1140,81 @@ function wireDecisionClick(e) {
   setDecision(appName, action);
   updateTabCounts();
 
+  // Swap just this card in place — preserves scroll position and other cards' expanded state
   const card = btn.closest('.card');
   const app = APPS.find(a => a.name === appName);
+  if (!card || !app) return;
   const wasExpanded = card.classList.contains('expanded');
-  const newCard = document.createElement('div');
-  newCard.innerHTML = buildCardHTML(app, wasExpanded).trim();
-  const replacement = newCard.firstChild;
+  const tmp = document.createElement('div');
+  tmp.innerHTML = buildCardHTML(app).trim();
+  const replacement = tmp.firstChild;
+  if (wasExpanded) replacement.classList.add('expanded');
 
-  replacement.querySelector('.card-head').addEventListener('click', (e) => {
+  // Re-wire the new card
+  replacement.querySelector('.card-head').addEventListener('click', e => {
     if (e.target.closest('.decision-btn') || e.target.closest('a')) return;
     replacement.classList.toggle('expanded');
   });
   replacement.querySelectorAll('.decision-btn').forEach(b => {
-    b.addEventListener('click', wireDecisionClick);
+    b.addEventListener('click', handleDecisionClick);
   });
 
   card.replaceWith(replacement);
 }
 
-async function init() {
-  // Show a loading indicator immediately
-  const results = document.getElementById('results');
-  if (results) {
-    results.innerHTML = '<div class="empty-state">Loading apps from apps.csv…</div>';
-  }
 
-  // Set up sync indicator and token dialog wiring upfront
+// ═══════════════════════════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════════════════════════
+
+async function init() {
   updateSyncIndicator();
-  if (!getToken() && !GITHUB_CONFIG.owner.startsWith('YOUR_')) {
+  if (!getToken()) { SYNC.status = 'no-token'; updateSyncIndicator(); }
+
+  // Token dialog wiring
+  document.getElementById('sync-indicator').addEventListener('click', () => {
+    document.getElementById('token-input').value = getToken();
+    document.getElementById('token-dialog').style.display = 'flex';
+  });
+  document.getElementById('modal-repo-name').textContent = `${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}`;
+  document.getElementById('token-cancel').addEventListener('click', () => {
+    document.getElementById('token-dialog').style.display = 'none';
+  });
+  document.getElementById('token-clear').addEventListener('click', () => {
+    if (!confirm('Clear stored GitHub token?')) return;
+    clearToken();
+    document.getElementById('token-dialog').style.display = 'none';
     SYNC.status = 'no-token';
     updateSyncIndicator();
-  }
-
-  // Wire the token dialog now — independent of CSV load
-  document.getElementById('sync-indicator').addEventListener('click', () => {
-    showTokenDialog();
-  });
-  document.getElementById('modal-repo-name').textContent =
-    `${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}`;
-  document.getElementById('token-cancel').addEventListener('click', hideTokenDialog);
-  document.getElementById('token-clear').addEventListener('click', () => {
-    if (confirm('Clear the stored GitHub token? You will need to paste it again to save decisions.')) {
-      clearToken();
-      hideTokenDialog();
-      SYNC.status = 'no-token';
-      updateSyncIndicator();
-    }
   });
   document.getElementById('token-save').addEventListener('click', () => {
     const v = document.getElementById('token-input').value.trim();
     if (!v) return;
     setToken(v);
-    hideTokenDialog();
+    document.getElementById('token-dialog').style.display = 'none';
     SYNC.status = 'idle';
     updateSyncIndicator();
-    scheduleSyncToGitHub();
   });
-  document.getElementById('token-dialog').addEventListener('click', (e) => {
-    if (e.target.id === 'token-dialog') hideTokenDialog();
+  document.getElementById('token-dialog').addEventListener('click', e => {
+    if (e.target.id === 'token-dialog') e.target.style.display = 'none';
   });
 
-  // Load the CSV — this is the new step
-  const ok = await loadAppsFromCSV();
-  if (!ok) return;  // loadAppsFromCSV showed an error; nothing else to do
+  // Load CSV
+  const ok = await loadCsv();
+  if (!ok) return;
 
-  // counts
-  const counts = { GREEN: 0, YELLOW: 0, RED: 0 };
-  APPS.forEach(a => counts[a.verdict]++);
-  document.getElementById('cnt-green').textContent = counts.GREEN;
-  document.getElementById('cnt-yellow').textContent = counts.YELLOW;
-  document.getElementById('cnt-red').textContent = counts.RED;
   document.getElementById('app-count').textContent = APPS.length + ' apps';
 
-  // populate category and ads filters
-  const cats = [...new Set(APPS.map(a => a.category))].sort();
+  // Populate dropdowns
+  const cats = [...new Set(APPS.map(a => a.category).filter(Boolean))].sort();
   const catSel = document.getElementById('cat-filter');
-  cats.forEach(c => {
-    const o = document.createElement('option');
-    o.value = c; o.textContent = c;
-    catSel.appendChild(o);
-  });
+  cats.forEach(c => { const o = document.createElement('option'); o.value = c; o.textContent = c; catSel.appendChild(o); });
 
-  const adsList = [...new Set(APPS.map(a => a.ads))].sort();
-  const adsSel = document.getElementById('ads-filter');
-  adsList.forEach(a => {
-    const o = document.createElement('option');
-    o.value = a; o.textContent = a;
-    adsSel.appendChild(o);
-  });
+  const countries = [...new Set(APPS.map(a => a.country).filter(Boolean))].sort();
+  const countrySel = document.getElementById('country-filter');
+  countries.forEach(c => { const o = document.createElement('option'); o.value = c; o.textContent = c; countrySel.appendChild(o); });
 
-  // wire tabs
+  // Tabs
   document.querySelectorAll('.tab[data-tab]').forEach(tab => {
     tab.addEventListener('click', () => {
       state.tab = tab.dataset.tab;
@@ -1725,28 +1223,21 @@ async function init() {
     });
   });
 
-  // wire chips
+  // Verdict chips
   document.querySelectorAll('.chip[data-verdict]').forEach(chip => {
     chip.addEventListener('click', () => {
       const v = chip.dataset.verdict;
-      if (state.verdicts.has(v)) {
-        state.verdicts.delete(v);
-        chip.classList.remove('active');
-      } else {
-        state.verdicts.add(v);
-        chip.classList.add('active');
-      }
+      if (state.verdicts.has(v)) { state.verdicts.delete(v); chip.classList.remove('active'); }
+      else { state.verdicts.add(v); chip.classList.add('active'); }
       render();
     });
   });
 
   catSel.addEventListener('change', e => { state.category = e.target.value; render(); });
-  adsSel.addEventListener('change', e => { state.ads = e.target.value; render(); });
+  countrySel.addEventListener('change', e => { state.country = e.target.value; render(); });
   document.getElementById('search').addEventListener('input', e => { state.search = e.target.value; render(); });
 
   render();
-
-  // After initial render, fetch latest decisions from GitHub in case the cached HTML is stale
   pullFromGitHub();
 }
 
